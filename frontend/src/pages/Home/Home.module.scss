@@ -1,0 +1,47 @@
+.mainContainer {
+  .section {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 10px 100px;
+
+    article {
+      h2 {
+        margin-bottom: 10px;
+      }
+
+      div.typesAcomo {
+        display: flex;
+        gap: 10px;
+
+        a {
+          color: #111;
+          font-size: 1.3rem;
+          font-weight: 600;
+
+          img {
+            width: 100%;
+            border-radius: 20px;
+            transition: .5s;
+          }
+
+          &:hover {
+
+            img{
+              transform: scale(1.05);
+            }
+          }
+        }
+      }
+    }
+
+    .ofertasContainer {
+      .ofertas {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        flex-wrap: wrap;
+      }
+    }
+  }
+}

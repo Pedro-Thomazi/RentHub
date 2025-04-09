@@ -1,0 +1,59 @@
+.card {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+  gap: 7px;
+  color: #111;
+  background-color: #eee;
+
+  img {
+    width: 100%;
+    height: 200px;
+    background-color: #000;
+    border-radius: 10px;
+  }
+
+  .description {
+    font-size: 1.2rem;
+  }
+
+  .location {
+    color: #555;
+  }
+
+  .avaliation {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    p:not(p.number) {
+      color: #555;
+    }
+
+    .number {
+      background-color: blue;
+      color: #fff;
+      padding: 5px;
+      border-radius: 5px;
+    }
+  }
+
+  .price {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    align-self: flex-end;
+
+    .number {
+      font-weight: 600;
+      color: #3B5D4F;
+    }
+  }
+
+  .indisponivel {
+    border-radius: 5px;
+    padding: 5px;
+    background-color: #a02121;
+    color: #fff;
+  }
+}

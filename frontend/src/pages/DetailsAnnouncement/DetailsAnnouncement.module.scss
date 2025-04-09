@@ -1,0 +1,132 @@
+.detailsContainer {
+  margin-bottom: 400px;
+  header {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-bottom: 50px;
+    padding: 10px 100px;
+    background-color: #3B5D4F;
+
+    .linkLogin {
+      background-color: #FAAD1B;
+      padding: 10px 40px;
+      border-radius: 40px;
+      border: 1px solid #FAAD1B;
+      color: #3B5D4F;
+      transition: .3s;
+
+      &:hover {
+        background-color: transparent;
+        color: #FAAD1B;
+      }
+
+      svg {
+        display: none;
+      }
+    }
+
+
+  }
+
+  .announcement {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 0 100px;
+
+    .title {
+      letter-spacing: 2px;
+    }
+
+    .localizacao {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+
+      svg {
+        color: #7392f8;
+      }
+    }
+
+    .content {
+      display: flex;
+      gap: 10px;
+
+      .images {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        width: 70%;
+
+        .principalImage {
+          display: block;
+          width: 100%;
+          height: 400px;
+          background-color: #000;
+        }
+
+        .anotherImages {
+          display: flex;
+          gap: 5px;
+
+          img {
+            display: block;
+            width: 100%;
+            height: 150px;
+            background-color: #000;
+          }
+        }
+      }
+
+      .details {
+        display: flex;
+        flex-direction: column;
+        gap: 5px;
+        border: 2px solid #aaa;
+        width: 30%;
+
+        .avaliacao {
+          padding: 10px;
+          display: flex;
+          align-items: center;
+          gap: 5px;
+      
+          p:not(p.number) {
+            color: #555;
+          }
+      
+          .number {
+            background-color: blue;
+            color: #fff;
+            padding: 5px;
+            border-radius: 5px;
+          }
+        }
+
+        .descricao {
+          padding: 10px;
+          border-top: 2px solid #aaa;
+          border-bottom: 2px solid #aaa;
+        }
+      }
+    }
+    
+    button {
+      cursor: pointer;
+      background-color: #006CE4;
+      align-self: flex-end;
+      width: 400px;
+      padding: 10px;
+      font-size: 1.3rem;
+      color: #fff;
+      border: none;
+      transition: .5s;
+
+      &:hover {
+        background-color: #0035e4;
+      }
+    }
+  }
+}

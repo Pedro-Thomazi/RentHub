@@ -1,0 +1,20 @@
+a.logo {
+  display: flex;
+  align-items: center;
+
+  img {
+    width: 50px;
+  }
+
+  span {
+    font-size: 2rem;
+    color: #FAAD1B;
+  }
+}
+
+// Media
+@media (max-width: 768px) {
+  a.logo span {
+    display: none;
+  }
+}
