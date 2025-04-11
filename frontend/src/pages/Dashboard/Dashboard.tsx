@@ -80,9 +80,9 @@ const Dashboard = () => {
         </div>
         <h1>Olá, {user.name}. <Link to={"/atualizar-meus-dados"}>Atualizar dados</Link></h1>
         <nav>
-          <a href=""><MdKingBed />Minhas reservas</a>
-          <a href="#anuncios"><MdHomeWork />Meus anúncios</a>
-          <Link to={"/"}><MdNotificationsActive />Notificações</Link>
+          <a href=""><MdKingBed /><span>Minhas reservas</span></a>
+          <a href="#anuncios"><MdHomeWork /><span>Meus anúncios</span></a>
+          <Link to={"/"}><MdNotificationsActive /><span>Notificações</span></Link>
         </nav>
       </header>
       <section id='anuncios' className={styles.myAnuncios}>

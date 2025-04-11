@@ -82,3 +82,84 @@
     }
   }
 }
+
+@media (max-width: 768px) {
+  .containeDashboard {
+    header {
+      width: 100%;
+      height: 100vh;
+      padding: 10px;
+  
+      div {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+  
+        .btnLogout {
+          cursor: pointer;
+          font-weight: 500;
+          font-size: 1.2rem;
+          width: 150px;
+          background-color: #a83535;
+          border: 1px solid #a83535;
+          color: #fff;
+          border-radius: 5px;
+          transition: .5s;
+  
+          &:hover {
+            background-color: transparent;
+            color: #a83535;
+            border-radius: 10px;
+          }
+        }
+      }
+
+      nav {
+        display: flex;
+        align-self: center;
+        gap: 5px;
+  
+        a {
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          background-color: #fff;
+          transform: translateY(50px);
+          font-size: 1.3rem;
+          color: #111;
+          border: 2px solid #FAAD1B;
+          padding: 20px;
+          width: auto;
+
+          span {
+            display: none;
+          }
+  
+          svg {
+            font-size: 2rem;
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 425px) {
+  .containeDashboard {
+    .myAnuncios {
+      padding: 50px 10px;
+  
+      h2 {
+        font-size: 2rem;
+        margin: 10px 0;
+      }
+  
+      div {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+        justify-content: center;
+      }
+    }
+  }
+}

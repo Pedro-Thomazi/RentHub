@@ -18,6 +18,18 @@
       }
     }
 
+    nav {
+      display: flex;
+      gap: 10px;
+
+      a {
+        font-size: 1.5rem;
+        padding-bottom: 5px;
+        border-bottom: 1px solid #FAAD1B;
+        color: #FAAD1B;
+      }
+    }
+
     form {
       transform: translateY(20px);
       align-self: center;
@@ -37,10 +49,19 @@
           border: none;
           border-bottom: 1px solid #111;
         }
+      }
+    }
+  }
+}
 
-        svg {
-          
-        }
+@media (max-width: 425px) {
+  .containerAnnouncement {
+
+    header {
+      padding: 10px;
+
+      form {
+        max-width: 400px;
       }
     }
   }

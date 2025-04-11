@@ -95,25 +95,30 @@
   .headerContainer {
     margin: 0;
     border-radius: 0;
+    padding: 10px;
+    height: 100vh;
 
-    .linkLogin {
-      background-color: transparent;
-      padding: 0px;
-      border-radius: 50%;
-      color: #FAAD1B;
-      transition: .3s;
-
-      &:hover {
+    .primarySection {
+      .linkLogin {
         background-color: transparent;
+        padding: 0px;
+        border-radius: 50%;
         color: #FAAD1B;
-      }
+        border: none;
+        transition: .3s;
 
-      p {
-        display: none;
-      }
+        &:hover {
+          background-color: transparent;
+          color: #FAAD1B;
+        }
 
-      svg {
-        display: block;
+        p {
+          display: none;
+        }
+
+        svg {
+          display: block;
+        }
       }
     }
   }

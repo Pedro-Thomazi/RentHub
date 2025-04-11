@@ -45,3 +45,31 @@
     }
   }
 }
+
+@media (max-width: 425px) {
+  .mainContainer {
+    .section {
+      padding: 10px;
+
+      article {
+        div.typesAcomo {
+          display: flex;
+          overflow-x: scroll;
+          padding-bottom: 10px;
+  
+          a {
+            img {
+              width: 300px;
+            }
+  
+            &:hover {
+              img{
+                transform: scale(1);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

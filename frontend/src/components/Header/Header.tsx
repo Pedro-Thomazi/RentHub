@@ -48,7 +48,6 @@ const Header = () => {
         <div className={styles.containerNavbar}>
           <BsList size={40} />
           <nav className={styles.navbar}>
-            <Link to={"/"}>Home</Link>
             <Link to={"/"}>Alugar</Link>
             <Link to={"/criar-anuncio"}>Anúnciar</Link>
           </nav>
