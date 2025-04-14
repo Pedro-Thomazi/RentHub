@@ -4,7 +4,7 @@ import styles from './Header.module.scss'
 // Icons
 import { BsList } from "react-icons/bs";
 import { MdLogin } from "react-icons/md";
-import { FaUserCircle } from "react-icons/fa";
+import { FaSearch, FaUserCircle } from "react-icons/fa";
 
 import Logo from '../Logo/Logo';
 import { useAuthContext } from '../../context/UserContext';
@@ -16,13 +16,29 @@ interface DataUser {
   email: string
 }
 
-const Header = () => {
+interface DataHeaderText {
+  tipo?: string
+  principalText: string
+  secondaryText: string
+}
+
+const Header = ({ tipo, principalText, secondaryText }: DataHeaderText) => {
   const { authenticated } = useAuthContext()
   const [user, setUser] = useState<DataUser>({
     name: "",
     email: "",
   })
   const [token] = useState<string>(localStorage.getItem("token") || "")
+  const [openSearch, setOpenSearch] = useState<string>("")
+
+  function openSearchMenu() {
+    if (openSearch == "") {
+      setOpenSearch(styles.open)
+    }
+    else {
+      setOpenSearch("")
+    }
+  }
 
   useEffect(() => {
 
@@ -41,6 +57,47 @@ const Header = () => {
     }
   }, [token])
 
+  function getDynamicText() {
+    switch (tipo) {
+      case "hoteis":
+        return "Hotéis disponíveis."
+      case "casas":
+        return "Casas disponíveis."
+      case "apartamentos":
+        return "Apartamentos disponíveis."
+      default:
+        return principalText || ""
+    }
+  }
+
+  function getDynamicNavbar() {
+    switch (tipo) {
+      case "hoteis":
+        return (
+          <nav className={styles.secondyNavbar}>
+            <Link to={"/anuncios/casas"}>Casas</Link>
+            <Link to={"/anuncios/apartamentos"}>Apartamentos</Link>
+          </nav>
+        )
+      case "casas":
+        return (
+          <nav className={styles.secondyNavbar}>
+            <Link to={"/anuncios/hoteis"}>Hotéis</Link>
+            <Link to={"/anuncios/apartamentos"}>Apartamentos</Link>
+          </nav>
+        )
+      case "apartamentos":
+        return (
+          <nav className={styles.secondyNavbar}>
+            <Link to={"/anuncios/hoteis"}>Hotéis</Link>
+            <Link to={"/anuncios/casas"}>Casas</Link>
+          </nav>
+        )
+      default:
+        return principalText || ""
+    }
+  }
+
   return (
     <header className={styles.headerContainer}>
       <section className={styles.primarySection}>
@@ -50,6 +107,11 @@ const Header = () => {
           <nav className={styles.navbar}>
             <Link to={"/"}>Alugar</Link>
             <Link to={"/criar-anuncio"}>Anúnciar</Link>
+
+            <form className={`${styles.searchForm} ${openSearch}`}>
+              <input type="search" name="" id="" placeholder='Buscar...' />
+            </form>
+            <FaSearch onClick={openSearchMenu} size={25} />
           </nav>
         </div>
         {authenticated ? (
@@ -65,8 +127,9 @@ const Header = () => {
         )}
       </section>
       <section className={styles.secondarySection}>
-        <h1>Encontre sua próxima estadia</h1>
-        <h2>Encontre ofertas em hotéis, casas, apartamentos e muito mais...</h2>
+        <h1>{getDynamicText()}</h1>
+        <h2>{secondaryText}</h2>
+        {tipo && (getDynamicNavbar())}
       </section>
     </header>
   )

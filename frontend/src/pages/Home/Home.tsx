@@ -48,7 +48,7 @@ const Home = () => {
 
   return (
     <main className={styles.mainContainer}>
-      <Header />
+      <Header principalText='Encontre sua próxima estadia' secondaryText='Encontre ofertas em hotéis, casas, apartamentos e muito mais...' />
       <section className={styles.section}>
         <article>
           <h2>Tipos de acomodação</h2>
