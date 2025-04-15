@@ -18,6 +18,8 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -25,6 +27,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class AnuncioController {
     private final AnuncioService anuncioService;
+    private static String pathImages = "src/main/java/br/com/backend/backend/uploads/images/";
 
     public AnuncioController(AnuncioService anuncioService) {
         this.anuncioService = anuncioService;
@@ -77,16 +80,17 @@ public class AnuncioController {
 
     @PostMapping("/create-anuncio")
     public ResponseEntity createAnuncio(@Valid
-                                        @RequestBody DataCreateAnuncio data,
+                                        @ModelAttribute DataCreateAnuncio data,
+                                        @RequestParam("urlImage") MultipartFile file,
                                         @AuthenticationPrincipal User user) {
         try {
-//            String uploadDir = "uploads/";
-//            Files.createDirectories(Paths.get(uploadDir));
-//            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-//            Path filePath = Paths.get(uploadDir + fileName);
-//            Files.write(filePath, file.getBytes());
 
-            var anuncio = anuncioService.create(data, user);
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(pathImages + String.valueOf(LocalDateTime.now().toString().replace(":", "$") + file.getOriginalFilename()));
+            Files.write(path, bytes);
+            String urlImage = String.valueOf(LocalDateTime.now().toString().replace(":", "$") + file.getOriginalFilename());
+
+            var anuncio = anuncioService.create(data, urlImage, user);
             return ResponseEntity.ok(new DataGetAnuncio(anuncio));
         } catch (Exception e) {
             System.out.println("Erro na criação do Anúncio: " + e.getMessage());
@@ -95,19 +99,19 @@ public class AnuncioController {
     }
 
     @PutMapping("/update-anuncio/{id}")
-    public ResponseEntity updateAnuncio(@Valid @RequestBody DataUpdateAnuncio data,
+    public ResponseEntity updateAnuncio(@Valid @ModelAttribute DataUpdateAnuncio data,
+                                        @RequestParam("urlImage") MultipartFile file,
                                         @PathVariable Long id,
                                         @AuthenticationPrincipal User user) {
         try {
-//            String uploadDir = "uploads/";
-//            Files.createDirectories(Paths.get(uploadDir));
-//            String fileName = System.currentTimeMillis() + "_" + file.getOriginalFilename();
-//            Path filePath = Paths.get(uploadDir + fileName);
-//            Files.write(filePath, file.getBytes());
+            byte[] bytes = file.getBytes();
+            Path path = Paths.get(pathImages + String.valueOf(LocalDateTime.now().toString().replace(":", "$") + file.getOriginalFilename()));
+            Files.write(path, bytes);
+            String urlImage = String.valueOf(LocalDateTime.now().toString().replace(":", "$") + file.getOriginalFilename());
 
-            var anuncio = anuncioService.updateAnuncio(data, id, user);
+            var anuncio = anuncioService.updateAnuncio(data, id, urlImage, user);
             return ResponseEntity.ok(new DataGetAnuncio(anuncio));
-        } catch (BusinessRuleException e) {
+        } catch (Exception e) {
             System.out.println("Erro na atualização do Anúncio: " + e.getMessage());
             return ResponseEntity.badRequest().body(e.getMessage());
         }

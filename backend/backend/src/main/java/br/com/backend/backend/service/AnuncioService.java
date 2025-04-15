@@ -23,7 +23,7 @@ public class AnuncioService {
     }
 
     @Transactional
-    public Anuncio create(DataCreateAnuncio data, User user) {
+    public Anuncio create(DataCreateAnuncio data, String urlImage, User user) {
         if (data.titulo() == null || data.titulo().isEmpty()) {
             throw new BusinessRuleException("O título é obrigatório");
         }if (data.descricao() == null || data.descricao().isEmpty()) {
@@ -38,20 +38,22 @@ public class AnuncioService {
         if (data.endereco() == null || data.endereco().isEmpty()) {
             throw new BusinessRuleException("O endereço é obrigatório");
         }
-        var anuncio = new Anuncio(data, user);
-//        anuncio.setUrlImage("/uploads/" + fileName);
+        if (urlImage == null || urlImage.isEmpty()) {
+            throw new BusinessRuleException("Adicione uma imagem ao anúncio!");
+        }
+        var anuncio = new Anuncio(data, urlImage, user);
         return repository.save(anuncio);
     }
 
     @Transactional
-    public Anuncio updateAnuncio(@Valid DataUpdateAnuncio data, Long id, User user) {
+    public Anuncio updateAnuncio(@Valid DataUpdateAnuncio data, Long id, String urlImage, User user) {
         var anuncio = repository.getReferenceById(id);
         var userCheck = new DataGetUser(user);
 
         if (!Objects.equals(anuncio.getUsuario(), userCheck)) {
             throw new BusinessRuleException("O usuário não pode alterar o anúncio de outro.");
         }
-        return anuncio.updateAnuncio(data);
+        return anuncio.updateAnuncio(data, urlImage);
     }
 
     @Transactional

@@ -32,7 +32,7 @@ public class Anuncio {
 
     public Anuncio() {}
 
-    public Anuncio(DataCreateAnuncio data, User user) {
+    public Anuncio(DataCreateAnuncio data, String urlImage, User user) {
         this.usuario = user;
         this.titulo = data.titulo();
         this.descricao = data.descricao();
@@ -43,9 +43,10 @@ public class Anuncio {
         this.dataCadastro = LocalDateTime.now();
         this.avaliacao = data.avaliacao();
         this.cidade = data.cidade();
+        this.urlImage = urlImage;
     }
 
-    public Anuncio updateAnuncio(DataUpdateAnuncio data) {
+    public Anuncio updateAnuncio(DataUpdateAnuncio data, String urlImage) {
         if (data.titulo() != null) {
             this.titulo = data.titulo();
         }
@@ -66,6 +67,9 @@ public class Anuncio {
         }
         if (data.cidade() != null) {
             this.cidade = data.cidade();
+        }
+        if (urlImage != null) {
+            this.urlImage = urlImage;
         }
         return this;
     }
