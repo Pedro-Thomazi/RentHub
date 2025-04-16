@@ -31,6 +31,7 @@ interface DataAnnouncement {
   disponivel: boolean
   cidade: string
   avaliacao: number
+  urlImage: string
 }
 
 const Home = () => {
@@ -71,7 +72,7 @@ const Home = () => {
           <h2>Ofertas</h2>
           <div className={styles.ofertas}>
             {announcements && announcements?.map((data) => (
-              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} />
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} />
             ))}
           </div>
         </article>

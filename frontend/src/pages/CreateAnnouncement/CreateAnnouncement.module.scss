@@ -1,32 +1,5 @@
 .containerCreate {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-
-  header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 5px 10px;
-    width: 100%;
-    background-color: #3B5D4F;
-
-    a.linkToDashboard {
-      background-color: #FAAD1B;
-      padding: 10px 40px;
-      border-radius: 40px;
-      border: 1px solid #FAAD1B;
-      color: #3B5D4F;
-      transition: .3s;
-
-      &:hover {
-        background-color: transparent;
-        color: #FAAD1B;
-      }
-    }
-  }
-
-  form {
+  .formAnnouncement {
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -35,7 +8,6 @@
     padding: 10px 20px;
     border-radius: 30px;
     background-color: #ccc;
-    margin-top: 40px;
     transition: 1s;
 
     h1 {

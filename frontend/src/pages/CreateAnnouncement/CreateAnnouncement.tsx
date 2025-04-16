@@ -1,8 +1,8 @@
-import { Link, useNavigate } from 'react-router-dom'
-import Logo from '../../components/Logo/Logo'
+import { useNavigate } from 'react-router-dom'
 import styles from './CreateAnnouncement.module.scss'
 import { ChangeEvent, FormEvent, useEffect, useState } from 'react'
 import { useAuthContext } from '../../context/UserContext'
+import Header from '../../components/Header/Header'
 
 interface DataAnnouncement {
   titulo: string
@@ -33,7 +33,7 @@ const CreateAnnouncement = () => {
   }
 
   useEffect(() => {
-    if (authenticated) navigate("/")
+    if (!authenticated) navigate("/login")
   }, [authenticated, navigate])
 
   function handleSubmit(e: FormEvent) {
@@ -46,12 +46,9 @@ const CreateAnnouncement = () => {
   }
   return (
     <main className={styles.containerCreate}>
-      <header>
-        <Logo />
-        <Link className={styles.linkToDashboard} to={"/dashboard"}>Voltar</Link>
-      </header>
+      <Header tipo='' principalText='Vamos anúnciar...' secondaryText='Precisamos saber sobre seu imóvel para proceguir' />
 
-      <form onSubmit={handleSubmit}>
+      <form className={styles.formAnnouncement} onSubmit={handleSubmit}>
         <h1>O que você quer anúnciar?</h1>
         <label>
           <input onChange={handleChange} type="text" name='titulo' placeholder='Título' required />
@@ -72,6 +69,15 @@ const CreateAnnouncement = () => {
         </label>
         <label>
           <input onChange={handleChange} type="text" name='endereco' placeholder='Endereço' required />
+        </label>
+        <label>
+          <input onChange={handleChange} type="text" name='avaliacao' placeholder='Avaliações' required />
+        </label>
+        <label>
+          <input onChange={handleChange} type="text" name='cidade' placeholder='Cidade' required />
+        </label>
+        <label>
+          <input onChange={handleChange} type="file" name='urlImage' required />
         </label>
         <button type='submit'>Anúnciar</button>
       </form>

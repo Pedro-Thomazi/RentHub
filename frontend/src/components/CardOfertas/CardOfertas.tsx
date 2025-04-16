@@ -8,12 +8,15 @@ interface DataAnnouncement {
   localizacao: string
   avaliacao: number
   disponivel: boolean
+  urlImage: string
 }
 
-const CardOfertas = ({ id, titulo, preco, localizacao, avaliacao, disponivel }: DataAnnouncement) => {
+
+const CardOfertas = ({ id, titulo, preco, localizacao, avaliacao, disponivel, urlImage }: DataAnnouncement) => {
+  console.log(urlImage)
   return (
     <Link className={styles.card} to={`/${titulo}/${id}`}>
-      <img src={'/'} alt="Apartamentos xyz" />
+      <img src={`http://localhost:8080/uploads/images/1744764197688pexels-adrian-dorobantu-989175-2127732.jpg`} alt={titulo + " foto"} />
       <p className={styles.description}>{titulo}</p>
       <p className={styles.location}>{localizacao}</p>
       <span className={styles.avaliation}>
