@@ -1,4 +1,5 @@
 .mainContainer {
+  
   .section {
     display: flex;
     flex-direction: column;
@@ -27,7 +28,7 @@
 
           &:hover {
 
-            img{
+            img {
               transform: scale(1.05);
             }
           }
@@ -36,11 +37,22 @@
     }
 
     .ofertasContainer {
+
       .ofertas {
         display: flex;
         justify-content: center;
         gap: 10px;
         flex-wrap: wrap;
+      }
+
+      .bests {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+
+        a {
+          width: auto;
+        }
       }
     }
   }
@@ -56,14 +68,14 @@
           display: flex;
           overflow-x: scroll;
           padding-bottom: 10px;
-  
+
           a {
             img {
               width: 300px;
             }
-  
+
             &:hover {
-              img{
+              img {
                 transform: scale(1);
               }
             }

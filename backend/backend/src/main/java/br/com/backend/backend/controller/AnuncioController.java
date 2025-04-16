@@ -27,7 +27,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class AnuncioController {
     private final AnuncioService anuncioService;
-    private static String pathImages = "src/main/resources/static/uploads/images/";
+    private static String pathImages = "src/main/resources/static/upload/images/";
 
     public AnuncioController(AnuncioService anuncioService) {
         this.anuncioService = anuncioService;
@@ -41,9 +41,25 @@ public class AnuncioController {
         return ResponseEntity.ok(res);
     }
 
+    @GetMapping("/top-anuncios")
+    public ResponseEntity getTopFourAnuncios() {
+        List<Anuncio> anuncios = anuncioService.getTopFourAnunciosByDisponivelTrue();
+        List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
+        System.out.println(res);
+        return ResponseEntity.ok(res);
+    }
+
     @GetMapping("/hoteis")
     public ResponseEntity getHotels() {
         List<Anuncio> anuncios = anuncioService.getHoteisDisponiveis();
+        List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
+        System.out.println(res);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/hoteis/bests")
+    public ResponseEntity getBestsHotels() {
+        List<Anuncio> anuncios = anuncioService.getBestsHoteisDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
         System.out.println(res);
         return ResponseEntity.ok(res);
@@ -57,9 +73,25 @@ public class AnuncioController {
         return ResponseEntity.ok(res);
     }
 
+    @GetMapping("/casas/bests")
+    public ResponseEntity getBestsHomes() {
+        List<Anuncio> anuncios = anuncioService.getBestsCasasDisponiveis();
+        List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
+        System.out.println(res);
+        return ResponseEntity.ok(res);
+    }
+
     @GetMapping("/apartamentos")
     public ResponseEntity getApartment() {
         List<Anuncio> anuncios = anuncioService.getAparatamentosDisponiveis();
+        List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
+        System.out.println(res);
+        return ResponseEntity.ok(res);
+    }
+
+    @GetMapping("/apartamentos/bests")
+    public ResponseEntity getBestsApartment() {
+        List<Anuncio> anuncios = anuncioService.getBestsAparatamentosDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
         System.out.println(res);
         return ResponseEntity.ok(res);

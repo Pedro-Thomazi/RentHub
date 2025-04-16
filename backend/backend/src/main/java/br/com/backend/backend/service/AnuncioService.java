@@ -9,6 +9,8 @@ import br.com.backend.backend.model.User.User;
 import br.com.backend.backend.repository.AnuncioRepository;
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -90,5 +92,21 @@ public class AnuncioService {
 
     public List<Anuncio> getAparatamentosDisponiveis() {
         return repository.findAparatamentosDisponiveis();
+    }
+
+    public List<Anuncio> getTopFourAnunciosByDisponivelTrue() {
+        return repository.findTop4ByDisponivelTrueOrderByAvaliacaoDesc();
+    }
+
+    public List<Anuncio> getBestsHoteisDisponiveis() {
+        return repository.findTwoBestsHoteisDisponiveis();
+    }
+
+    public List<Anuncio> getBestsCasasDisponiveis() {
+        return repository.findTwoBestsCasasDisponiveis();
+    }
+
+    public List<Anuncio> getBestsAparatamentosDisponiveis() {
+        return repository.findTwoBestsAparatamentosDisponiveis();
     }
 }

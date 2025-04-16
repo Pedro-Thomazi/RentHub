@@ -37,14 +37,28 @@ interface DataAnnouncement {
 const Home = () => {
   const [token] = useState<string>(localStorage.getItem("token") || "")
   const [announcements, setAnnouncements] = useState<DataAnnouncement[] | null>([])
+  const [homes, setHomes] = useState<DataAnnouncement[] | null>([])
+  const [hotels, setHotels] = useState<DataAnnouncement[] | null>([])
+  const [apartaments, setApartaments] = useState<DataAnnouncement[] | null>([])
 
   useEffect(() => {
-    fetch("http://localhost:8080/anuncios").then(async (res) => {
+    fetch("http://localhost:8080/top-anuncios").then(async (res) => {
       const data = await res.json()
       setAnnouncements(data)
-      console.log(data)
     })
-    
+    fetch("http://localhost:8080/hoteis/bests").then(async (res) => {
+      const data = await res.json()
+      setHotels(data)
+    })
+    fetch("http://localhost:8080/casas/bests").then(async (res) => {
+      const data = await res.json()
+      setHomes(data)
+    })
+    fetch("http://localhost:8080/apartamentos/bests").then(async (res) => {
+      const data = await res.json()
+      setApartaments(data)
+    })
+
   }, [token])
 
   return (
@@ -69,9 +83,33 @@ const Home = () => {
           </div>
         </article>
         <article className={styles.ofertasContainer}>
-          <h2>Ofertas</h2>
+          <h2>Os mais bem avaliados</h2>
           <div className={styles.ofertas}>
             {announcements && announcements?.map((data) => (
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} />
+            ))}
+          </div>
+        </article>
+        <article className={styles.ofertasContainer}>
+          <h2>Os mais bem avaliados</h2>
+          <h1>Hotéis</h1>
+          <br />
+          <div className={styles.bests}>
+            {hotels && hotels?.map((data) => (
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} />
+            ))}
+          </div>
+          <h1>Casas</h1>
+          <br />
+          <div className={styles.bests}>
+            {homes && homes?.map((data) => (
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} />
+            ))}
+          </div>
+          <h1>Apartamentos</h1>
+          <br />
+          <div className={styles.bests}>
+            {apartaments && apartaments?.map((data) => (
               <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} />
             ))}
           </div>
