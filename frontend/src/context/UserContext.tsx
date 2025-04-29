@@ -31,6 +31,7 @@ interface DataAnnouncement {
   endereco: string
   cidade: string
   avaliacao: number
+  urlImage: File | null
 }
 
 interface AuthContextType {

@@ -8,12 +8,19 @@ interface DataAnnouncement {
   endereco: string
   cidade: string
   avaliacao: number
+  urlImage: File
 }
 
 
 export default function useAnnouncement() {
 
   async function create(announcement: DataAnnouncement, token: string, navigate: NavigateFunction) {
+
+    const formData = new FormData()
+
+    await Object.keys(announcement).forEach((key) => {
+      formData.append(key, announcement[key])
+    })
 
     try {
       await fetch("http://localhost:8080/create-anuncio", {
