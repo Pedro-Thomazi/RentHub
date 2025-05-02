@@ -27,7 +27,7 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class AnuncioController {
     private final AnuncioService anuncioService;
-    private static String pathImages = "src/main/resources/static/upload/images/";
+    private static String pathImages = "uploads/images/";
 
     public AnuncioController(AnuncioService anuncioService) {
         this.anuncioService = anuncioService;
@@ -118,9 +118,10 @@ public class AnuncioController {
         try {
 
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(pathImages + String.valueOf(System.currentTimeMillis() + file.getOriginalFilename()));
+            String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
+            Path path = Paths.get(pathImages + String.valueOf(nameImage));
             Files.write(path, bytes);
-            String urlImage = String.valueOf(System.currentTimeMillis() + file.getOriginalFilename());
+            String urlImage = String.valueOf(nameImage);
 
             var anuncio = anuncioService.create(data, urlImage, user);
             return ResponseEntity.ok(new DataGetAnuncio(anuncio));
@@ -137,9 +138,10 @@ public class AnuncioController {
                                         @AuthenticationPrincipal User user) {
         try {
             byte[] bytes = file.getBytes();
-            Path path = Paths.get(pathImages + String.valueOf(LocalDateTime.now().toString().replace(":", "$") + file.getOriginalFilename()));
+            String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
+            Path path = Paths.get(pathImages + String.valueOf(nameImage));
             Files.write(path, bytes);
-            String urlImage = String.valueOf(LocalDateTime.now().toString().replace(":", "$") + file.getOriginalFilename());
+            String urlImage = String.valueOf(nameImage);
 
             var anuncio = anuncioService.updateAnuncio(data, id, urlImage, user);
             return ResponseEntity.ok(new DataGetAnuncio(anuncio));

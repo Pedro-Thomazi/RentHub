@@ -32,7 +32,7 @@ public class SecurityConfigs {
                 .and()
                 .authorizeHttpRequests(
                         req -> {
-                            req.requestMatchers(HttpMethod.GET, "/upload/**").permitAll();
+                            req.requestMatchers(HttpMethod.GET, "/uploads/**").permitAll();
                             req.requestMatchers(HttpMethod.POST, "/register").permitAll();
                             req.requestMatchers(HttpMethod.POST, "/login").permitAll();
                             req.requestMatchers(HttpMethod.GET, "/anuncios").permitAll();

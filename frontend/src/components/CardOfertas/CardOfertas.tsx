@@ -16,7 +16,7 @@ const CardOfertas = ({ id, titulo, preco, localizacao, avaliacao, disponivel, ur
   console.log(urlImage)
   return (
     <Link className={styles.card} to={`/${titulo}/${id}`}>
-      <img src={`http://localhost:8080/upload/images/${urlImage}`} alt={titulo + " foto"} />
+      <img src={`http://localhost:8080/uploads/images/${urlImage}`} alt={titulo + " foto"} />
       <p className={styles.description}>{titulo}</p>
       <p className={styles.location}>{localizacao}</p>
       <span className={styles.avaliation}>
