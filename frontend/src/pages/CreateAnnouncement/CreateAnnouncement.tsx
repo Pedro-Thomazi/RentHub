@@ -12,7 +12,7 @@ interface DataAnnouncement {
   endereco: string
   avaliacao: number
   cidade: string
-  urlImage: File | null
+  urlImage: FileList | null
 }
 
 const CreateAnnouncement = () => {
@@ -34,16 +34,17 @@ const CreateAnnouncement = () => {
     setAnnouncement({ ...announcement, [e.target.name]: e.target.value })
   }
 
+  function handleImage(e: ChangeEvent<HTMLInputElement>) {
+    setAnnouncement({ ...announcement, [e.target.name]: e.target.files })
+  }
+
   useEffect(() => {
     if (!authenticated) navigate("/login")
   }, [authenticated, navigate])
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
-
-    console.log(token)
     create(announcement, token, navigate)
-
     console.log(announcement)
   }
   return (
@@ -79,7 +80,7 @@ const CreateAnnouncement = () => {
           <input onChange={handleChange} type="text" name='cidade' placeholder='Cidade' required />
         </label>
         <label>
-          <input onChange={handleChange} type="file" name='urlImage' required />
+          <input onChange={handleImage} type="file" name='urlImage' required />
         </label>
         <button type='submit'>Anúnciar</button>
       </form>

@@ -8,7 +8,7 @@ interface DataAnnouncement {
   localizacao: string
   avaliacao: number
   disponivel: boolean
-  urlImage: string
+  urlImage: FileList | null
 }
 
 

@@ -8,13 +8,16 @@ interface DataAnnouncement {
   endereco: string
   cidade: string
   avaliacao: number
-  urlImage: File
+  urlImage: FileList | null
 }
 
 
 export default function useAnnouncement() {
 
   async function create(announcement: DataAnnouncement, token: string, navigate: NavigateFunction) {
+    if (announcement.urlImage) {
+      console.log(announcement.urlImage[0])
+    }
 
     const formData = new FormData()
 
@@ -26,15 +29,21 @@ export default function useAnnouncement() {
       formData.append("endereco", announcement.endereco);
       formData.append("cidade", announcement.cidade);
       formData.append("avaliacao", String(announcement.avaliacao));
-      formData.append("image", announcement.urlImage);
+      if (announcement.urlImage) {
+        for (let i = 0; i < announcement.urlImage.length; i++) {
+          formData.append('urlImage', announcement.urlImage[i])
+        }
+      }
 
       await fetch("http://localhost:8080/create-anuncio", {
         method: "POST",
         headers: {
+          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${JSON.parse(token)}`
         },
         body: formData
       })
+      console.log(formData)
       await navigate("/dashboard")
     } catch (error) {
       console.error("Erro: " + error)
