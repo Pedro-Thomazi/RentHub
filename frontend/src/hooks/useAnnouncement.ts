@@ -18,7 +18,6 @@ export default function useAnnouncement() {
     if (announcement.urlImage) {
       console.log(announcement.urlImage[0])
     }
-
     const formData = new FormData()
 
     try {
@@ -29,21 +28,27 @@ export default function useAnnouncement() {
       formData.append("endereco", announcement.endereco);
       formData.append("cidade", announcement.cidade);
       formData.append("avaliacao", String(announcement.avaliacao));
-      if (announcement.urlImage) {
-        for (let i = 0; i < announcement.urlImage.length; i++) {
-          formData.append('urlImage', announcement.urlImage[i])
-        }
+
+      if (announcement.urlImage && announcement.urlImage[0]) {
+        formData.append("urlImage", announcement.urlImage[0]); // Pega o primeiro item do FileList
+      } else {
+        alert("Selecione uma imagem.");
+        return;
       }
+
+      console.log(announcement)
 
       await fetch("http://localhost:8080/create-anuncio", {
         method: "POST",
         headers: {
-          'Content-Type': 'multipart/form-data',
           Authorization: `Bearer ${JSON.parse(token)}`
         },
         body: formData
       })
-      console.log(formData)
+
+      for (const pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+      }
       await navigate("/dashboard")
     } catch (error) {
       console.error("Erro: " + error)

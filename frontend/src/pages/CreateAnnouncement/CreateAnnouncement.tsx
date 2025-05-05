@@ -45,7 +45,6 @@ const CreateAnnouncement = () => {
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
     create(announcement, token, navigate)
-    console.log(announcement)
   }
   return (
     <main className={styles.containerCreate}>
