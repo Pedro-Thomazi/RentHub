@@ -14,7 +14,7 @@ interface DataAnnouncement {
 
 const CardOfertas = ({ id, titulo, preco, localizacao, avaliacao, disponivel, urlImage }: DataAnnouncement) => {
   return (
-    <Link className={styles.card} to={`/${titulo}/${id}`}>
+    <Link className={styles.card} to={`/atualizar-anuncio/${titulo}/${id}`}>
       <img src={`http://localhost:8080/uploads/images/${urlImage}`} alt={titulo + " foto"} />
       <p className={styles.description}>{titulo}</p>
       <p className={styles.location}>{localizacao}</p>

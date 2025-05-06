@@ -12,6 +12,7 @@ import PageHotels from "./pages/PageAnnouncements/PageHotels"
 import PageHomes from "./pages/PageAnnouncements/PageHomes"
 import PageApartaments from "./pages/PageAnnouncements/PageApartaments"
 import PageAnnouncements from "./pages/PageAnnouncements/PageAnnouncements"
+import UpdateAnnouncement from "./pages/UpdateAnnouncement/UpdateAnnouncement"
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/register" element={<Register />} />
           <Route path="/criar-anuncio" element={<CreateAnnouncement />} />
           <Route path="/:titulo/:id" element={<DetailsAnnouncement />} />
+          <Route path="/atualizar-anuncio/:titulo/:id" element={<UpdateAnnouncement />} />
           <Route path="/anuncios/:tipo" element={<PageAnnouncements />}>
             <Route path="hoteis" element={<PageHotels />} />
             <Route path="casas" element={<PageHomes />} />
