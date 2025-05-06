@@ -18,6 +18,7 @@ interface DataAnnouncement {
 const CreateAnnouncement = () => {
   const { authenticated, create } = useAuthContext()
   const [token] = useState<string>(localStorage.getItem("token") || "")
+  const [previewImg, setPreviewImg] = useState<File[]>([])
   const [announcement, setAnnouncement] = useState<DataAnnouncement>({
     titulo: "",
     descricao: "",
@@ -35,6 +36,9 @@ const CreateAnnouncement = () => {
   }
 
   function handleImage(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files) {
+      setPreviewImg(Array.from(e.target.files))
+    }
     setAnnouncement({ ...announcement, [e.target.name]: e.target.files })
   }
 
@@ -79,8 +83,13 @@ const CreateAnnouncement = () => {
           <input onChange={handleChange} type="text" name='cidade' placeholder='Cidade' required />
         </label>
         <label>
-          <input onChange={handleImage} type="file" name='urlImage' required />
+          <input onChange={handleImage} multiple type="file" name='urlImage' required />
         </label>
+        <div className={styles.containerImagesPrev}>
+          {previewImg.map((image, index) => (
+            <img className={styles.imgPreview} src={URL.createObjectURL(image)} alt={`Minha foto ${index + 1}`} key={index} />
+          ))}
+        </div>
         <button type='submit'>Anúnciar</button>
       </form>
     </main>

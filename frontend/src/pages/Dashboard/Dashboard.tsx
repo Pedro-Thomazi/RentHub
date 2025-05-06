@@ -29,6 +29,7 @@ interface DataAnnouncement {
   disponivel: boolean
   cidade: string
   avaliacao: number
+  urlImage: FileList | null
 }
 
 const Dashboard = () => {

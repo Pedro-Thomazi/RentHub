@@ -1,6 +1,9 @@
 .headerContainer {
   padding: 10px 100px;
-  background-color: #3B5D4F;
+  background: linear-gradient(to right, #3B5D4F 40%, #3b5d4f71), url("../../assets/Images/homeImage.jpg");
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
 
   .primarySection {
     display: flex;

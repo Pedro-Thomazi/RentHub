@@ -7,7 +7,6 @@ import fotoApartamento from "../../assets/Images/fotoApartamento.jpg"
 import fotoHotel from "../../assets/Images/fotoHotel.jpg"
 import CardOfertas from '../../components/CardOfertas/CardOfertas'
 import { useEffect, useState } from 'react'
-import axios from 'axios'
 
 interface DataUser {
   ativo: boolean
@@ -31,7 +30,7 @@ interface DataAnnouncement {
   disponivel: boolean
   cidade: string
   avaliacao: number
-  urlImage: string
+  urlImage: FileList | null
 }
 
 const Home = () => {

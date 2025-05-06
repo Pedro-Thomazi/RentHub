@@ -50,7 +50,8 @@
       border-radius: 10px;
       background-color: #ddd;
 
-      input, select {
+      input,
+      select {
         flex-grow: 1;
         background-color: transparent;
         outline: none;
@@ -66,6 +67,19 @@
         &.hide {
           display: none;
         }
+      }
+    }
+
+    .containerImagesPrev {
+      display: flex;
+      flex-wrap: wrap;
+      // background-color: red;
+      max-width: 710px;
+      width: 100%;
+
+      gap: 10px;
+      .imgPreview {
+        width: 350px;
       }
     }
 
