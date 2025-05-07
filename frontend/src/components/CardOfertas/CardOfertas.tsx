@@ -11,10 +11,14 @@ interface DataAnnouncement {
   urlImage: FileList | null
 }
 
+interface DataCard extends DataAnnouncement {
+  url: string
+}
 
-const CardOfertas = ({ id, titulo, preco, localizacao, avaliacao, disponivel, urlImage }: DataAnnouncement) => {
+
+const CardOfertas = ({ id, titulo, preco, localizacao, avaliacao, disponivel, urlImage, url }: DataCard) => {
   return (
-    <Link className={styles.card} to={`/atualizar-anuncio/${titulo}/${id}`}>
+    <Link className={styles.card} to={url}>
       <img src={`http://localhost:8080/uploads/images/${urlImage}`} alt={titulo + " foto"} />
       <p className={styles.description}>{titulo}</p>
       <p className={styles.location}>{localizacao}</p>
