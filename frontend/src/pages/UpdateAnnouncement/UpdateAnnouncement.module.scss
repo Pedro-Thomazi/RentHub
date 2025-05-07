@@ -1,0 +1,102 @@
+.containerCreate {
+  .formAnnouncement {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    padding: 10px 20px;
+    border-radius: 30px;
+    background-color: #ccc;
+    transition: 1s;
+
+    h1 {
+      font-size: 2.5rem;
+      font-weight: 400;
+      color: #3B5D4F;
+    }
+
+    .socials {
+      display: flex;
+      gap: 10px;
+
+      a {
+        position: relative;
+        display: block;
+        width: 30px;
+        height: 30px;
+        border: 1px solid #222;
+        border-radius: 50%;
+
+        svg {
+          position: absolute;
+          left: 50%;
+          top: 50%;
+          transform: translate(-50%, -50%);
+          color: #222;
+        }
+      }
+    }
+
+    p {
+      color: #555;
+    }
+
+    label {
+      display: flex;
+      width: 300px;
+      padding: 10px;
+      gap: 5px;
+      border-radius: 10px;
+      background-color: #ddd;
+
+      input,
+      select {
+        flex-grow: 1;
+        background-color: transparent;
+        outline: none;
+        border: none;
+        font-size: 1.1rem;
+      }
+
+
+      svg {
+        font-size: 1.4rem;
+        color: #999;
+
+        &.hide {
+          display: none;
+        }
+      }
+    }
+
+    .containerImagesPrev {
+      display: flex;
+      flex-wrap: wrap;
+      // background-color: red;
+      max-width: 710px;
+      width: 100%;
+
+      gap: 10px;
+      .imgPreview {
+        width: 350px;
+      }
+    }
+
+    button {
+      cursor: pointer;
+      border: 1px solid #3B5D4F;
+      color: #eee;
+      background-color: #3B5D4F;
+      font-size: 1.2rem;
+      padding: 15px 50px;
+      border-radius: 40px;
+      transition: .4s;
+
+      &:hover {
+        background-color: transparent;
+        color: #3B5D4F;
+      }
+    }
+  }
+}

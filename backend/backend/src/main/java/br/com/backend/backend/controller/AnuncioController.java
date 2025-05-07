@@ -14,12 +14,9 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDateTime;
-import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -37,7 +34,6 @@ public class AnuncioController {
     public ResponseEntity getAnuncios() {
         List<Anuncio> anuncios = anuncioService.getAnunciosByDisponivelTrue();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 
@@ -45,7 +41,6 @@ public class AnuncioController {
     public ResponseEntity getTopFourAnuncios() {
         List<Anuncio> anuncios = anuncioService.getTopFourAnunciosByDisponivelTrue();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 
@@ -53,7 +48,6 @@ public class AnuncioController {
     public ResponseEntity getHotels() {
         List<Anuncio> anuncios = anuncioService.getHoteisDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 
@@ -61,7 +55,6 @@ public class AnuncioController {
     public ResponseEntity getBestsHotels() {
         List<Anuncio> anuncios = anuncioService.getBestsHoteisDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 
@@ -69,7 +62,6 @@ public class AnuncioController {
     public ResponseEntity getHomes() {
         List<Anuncio> anuncios = anuncioService.getCasasDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 
@@ -77,7 +69,6 @@ public class AnuncioController {
     public ResponseEntity getBestsHomes() {
         List<Anuncio> anuncios = anuncioService.getBestsCasasDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 
@@ -85,7 +76,6 @@ public class AnuncioController {
     public ResponseEntity getApartment() {
         List<Anuncio> anuncios = anuncioService.getAparatamentosDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 
@@ -93,7 +83,6 @@ public class AnuncioController {
     public ResponseEntity getBestsApartment() {
         List<Anuncio> anuncios = anuncioService.getBestsAparatamentosDisponiveis();
         List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
-        System.out.println(res);
         return ResponseEntity.ok(res);
     }
 

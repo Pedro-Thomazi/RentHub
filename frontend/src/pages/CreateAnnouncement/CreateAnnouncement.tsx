@@ -83,7 +83,7 @@ const CreateAnnouncement = () => {
           <input onChange={handleChange} type="text" name='cidade' placeholder='Cidade' required />
         </label>
         <label>
-          <input onChange={handleImage} multiple type="file" name='urlImage' required />
+          <input onChange={handleImage} type="file" name='urlImage' required />
         </label>
         <div className={styles.containerImagesPrev}>
           {previewImg.map((image, index) => (

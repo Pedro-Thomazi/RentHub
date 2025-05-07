@@ -56,7 +56,50 @@ export default function useAnnouncement() {
     }
   }
 
+  async function update(id: number, announcement: DataAnnouncement, token: string, navigate: NavigateFunction) {
+    if (announcement.urlImage) {
+      console.log(announcement.urlImage[0])
+    }
+    const formData = new FormData()
+
+    try {
+      formData.append("titulo", announcement.titulo);
+      formData.append("descricao", announcement.descricao);
+      formData.append("preco", String(announcement.preco));
+      formData.append("tipoImovel", announcement.tipoImovel);
+      formData.append("endereco", announcement.endereco);
+      formData.append("cidade", announcement.cidade);
+      formData.append("avaliacao", String(announcement.avaliacao));
+
+      if (announcement.urlImage && announcement.urlImage[0]) {
+        formData.append("urlImage", announcement.urlImage[0]); // Pega o primeiro item do FileList
+      } else {
+        alert("Selecione uma imagem.");
+        return;
+      }
+
+      console.log(announcement)
+
+      await fetch(`http://localhost:8080/update-anuncio/${id}`, {
+        method: "PUT",
+        headers: {
+          Authorization: `Bearer ${JSON.parse(token)}`
+        },
+        body: formData
+      })
+
+      for (const pair of formData.entries()) {
+        console.log(`${pair[0]}:`, pair[1]);
+      }
+      await navigate("/dashboard")
+    } catch (error) {
+      console.error("Erro: " + error)
+      alert("Erro na criação do anúncio.")
+    }
+  }
+
   return {
-    create
+    create,
+    update
   }
 }
