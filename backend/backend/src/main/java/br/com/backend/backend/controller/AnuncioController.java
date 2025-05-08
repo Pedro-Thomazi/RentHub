@@ -5,6 +5,7 @@ import br.com.backend.backend.model.Anuncio.Anuncio;
 import br.com.backend.backend.model.Anuncio.DataCreateAnuncio;
 import br.com.backend.backend.model.Anuncio.DataGetAnuncio;
 import br.com.backend.backend.model.Anuncio.DataUpdateAnuncio;
+import br.com.backend.backend.model.Imagens.Images;
 import br.com.backend.backend.model.User.DataGetUser;
 import br.com.backend.backend.model.User.User;
 import br.com.backend.backend.service.AnuncioService;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -102,17 +104,25 @@ public class AnuncioController {
     @PostMapping("/create-anuncio")
     public ResponseEntity createAnuncio(@Valid
                                         @ModelAttribute DataCreateAnuncio data,
-                                        @RequestParam("urlImage") MultipartFile file,
+                                        @RequestParam("urlImage") MultipartFile[] files,
                                         @AuthenticationPrincipal User user) {
         try {
+            List<Images> images = new ArrayList<>();
 
-            byte[] bytes = file.getBytes();
-            String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
-            Path path = Paths.get(pathImages + String.valueOf(nameImage));
-            Files.write(path, bytes);
-            String urlImage = String.valueOf(nameImage);
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    byte[] bytes = file.getBytes();
+                    String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
+                    Path path = Paths.get(pathImages + String.valueOf(nameImage));
+                    Files.write(path, bytes);
 
-            var anuncio = anuncioService.create(data, urlImage, user);
+                    Images image = new Images();
+                    image.setNameImageFile(nameImage);
+                    System.out.println("Image: " + image);
+                }
+            }
+
+            var anuncio = anuncioService.create(data, images, user);
             return ResponseEntity.ok(new DataGetAnuncio(anuncio));
         } catch (Exception e) {
             System.out.println("Erro na criação do Anúncio: " + e.getMessage());
@@ -122,17 +132,25 @@ public class AnuncioController {
 
     @PutMapping("/update-anuncio/{id}")
     public ResponseEntity updateAnuncio(@Valid @ModelAttribute DataUpdateAnuncio data,
-                                        @RequestParam("urlImage") MultipartFile file,
+                                        @RequestParam("urlImage") MultipartFile[] files,
                                         @PathVariable Long id,
                                         @AuthenticationPrincipal User user) {
         try {
-            byte[] bytes = file.getBytes();
-            String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
-            Path path = Paths.get(pathImages + String.valueOf(nameImage));
-            Files.write(path, bytes);
-            String urlImage = String.valueOf(nameImage);
+            List<Images> images = new ArrayList<>();
 
-            var anuncio = anuncioService.updateAnuncio(data, id, urlImage, user);
+            for (MultipartFile file : files) {
+                if (!file.isEmpty()) {
+                    byte[] bytes = file.getBytes();
+                    String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
+                    Path path = Paths.get(pathImages + String.valueOf(nameImage));
+                    Files.write(path, bytes);
+
+                    Images image = new Images();
+                    image.setNameImageFile(nameImage);
+                }
+            }
+
+            var anuncio = anuncioService.updateAnuncio(data, id, images, user);
             return ResponseEntity.ok(new DataGetAnuncio(anuncio));
         } catch (Exception e) {
             System.out.println("Erro na atualização do Anúncio: " + e.getMessage());

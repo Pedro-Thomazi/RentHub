@@ -1,9 +1,12 @@
 package br.com.backend.backend.model.Anuncio;
 
+import br.com.backend.backend.model.Imagens.Images;
 import br.com.backend.backend.model.User.DataGetUser;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public record DataGetAnuncio(
         DataGetUser user,
@@ -17,7 +20,7 @@ public record DataGetAnuncio(
         String cidade,
         Double avaliacao,
         LocalDateTime dataCadastro,
-        String urlImage
+        List<String> urlImage
 ) {
     public DataGetAnuncio(Anuncio anuncio) {
         this(
@@ -33,6 +36,9 @@ public record DataGetAnuncio(
                 anuncio.getAvaliacao(),
                 anuncio.getDataCadastro(),
                 anuncio.getUrlImage()
+                        .stream()
+                        .map(Images::getNameImageFile)
+                        .collect(Collectors.toList())
         );
     }
 }

@@ -1,5 +1,6 @@
 package br.com.backend.backend.model.Anuncio;
 
+import br.com.backend.backend.model.Imagens.Images;
 import br.com.backend.backend.model.User.DataGetUser;
 import br.com.backend.backend.model.User.User;
 import jakarta.persistence.*;
@@ -7,6 +8,8 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "anuncios")
@@ -28,11 +31,12 @@ public class Anuncio {
     private LocalDateTime dataCadastro;
     private Double avaliacao;
     private String cidade;
-    private String urlImage;
+    @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Images> urlImage = new ArrayList<>();
 
     public Anuncio() {}
 
-    public Anuncio(DataCreateAnuncio data, String urlImage, User user) {
+    public Anuncio(DataCreateAnuncio data, List<Images> images, User user) {
         this.usuario = user;
         this.titulo = data.titulo();
         this.descricao = data.descricao();
@@ -43,10 +47,10 @@ public class Anuncio {
         this.dataCadastro = LocalDateTime.now();
         this.avaliacao = data.avaliacao();
         this.cidade = data.cidade();
-        this.urlImage = urlImage;
+        this.urlImage.addAll(images);
     }
 
-    public Anuncio updateAnuncio(DataUpdateAnuncio data, String urlImage) {
+    public Anuncio updateAnuncio(DataUpdateAnuncio data, List<Images> images) {
         if (data.titulo() != null) {
             this.titulo = data.titulo();
         }
@@ -69,7 +73,7 @@ public class Anuncio {
             this.cidade = data.cidade();
         }
         if (urlImage != null) {
-            this.urlImage = urlImage;
+            this.urlImage.addAll(images);
         }
         return this;
     }
@@ -86,12 +90,12 @@ public class Anuncio {
         this.id = id;
     }
 
-    public String getUrlImage() {
+    public List<Images> getUrlImage() {
         return urlImage;
     }
 
-    public void setUrlImage(String urlImage) {
-        this.urlImage = urlImage;
+    public void setUrlImage(List<Images> images) {
+        this.urlImage.addAll(images);
     }
 
     public DataGetUser getUsuario() {
