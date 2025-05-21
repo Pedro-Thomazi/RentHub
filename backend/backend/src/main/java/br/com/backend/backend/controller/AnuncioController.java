@@ -1,12 +1,10 @@
 package br.com.backend.backend.controller;
 
-import br.com.backend.backend.exception.BusinessRuleException;
 import br.com.backend.backend.model.Anuncio.Anuncio;
 import br.com.backend.backend.model.Anuncio.DataCreateAnuncio;
 import br.com.backend.backend.model.Anuncio.DataGetAnuncio;
 import br.com.backend.backend.model.Anuncio.DataUpdateAnuncio;
 import br.com.backend.backend.model.Imagens.Images;
-import br.com.backend.backend.model.User.DataGetUser;
 import br.com.backend.backend.model.User.User;
 import br.com.backend.backend.service.AnuncioService;
 import jakarta.validation.Valid;
@@ -107,7 +105,7 @@ public class AnuncioController {
                                         @RequestParam("urlImage") MultipartFile[] files,
                                         @AuthenticationPrincipal User user) {
         try {
-            List<Images> images = new ArrayList<>();
+            List<String> images = new ArrayList<>();
 
             for (MultipartFile file : files) {
                 if (!file.isEmpty()) {
@@ -116,9 +114,7 @@ public class AnuncioController {
                     Path path = Paths.get(pathImages + String.valueOf(nameImage));
                     Files.write(path, bytes);
 
-                    Images image = new Images();
-                    image.setNameImageFile(nameImage);
-                    System.out.println("Image: " + image);
+                    images.add(nameImage);
                 }
             }
 
@@ -136,7 +132,7 @@ public class AnuncioController {
                                         @PathVariable Long id,
                                         @AuthenticationPrincipal User user) {
         try {
-            List<Images> images = new ArrayList<>();
+            List<String> images = new ArrayList<>();
 
             for (MultipartFile file : files) {
                 if (!file.isEmpty()) {
@@ -145,8 +141,7 @@ public class AnuncioController {
                     Path path = Paths.get(pathImages + String.valueOf(nameImage));
                     Files.write(path, bytes);
 
-                    Images image = new Images();
-                    image.setNameImageFile(nameImage);
+                    images.add(nameImage);
                 }
             }
 

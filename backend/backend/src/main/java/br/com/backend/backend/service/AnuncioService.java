@@ -30,7 +30,7 @@ public class AnuncioService {
     }
 
     @Transactional
-    public Anuncio create(DataCreateAnuncio data, List<Images> images, User user) {
+    public Anuncio create(DataCreateAnuncio data, List<String> images, User user) {
         if (data.titulo() == null || data.titulo().isEmpty()) {
             throw new BusinessRuleException("O título é obrigatório");
         }if (data.descricao() == null || data.descricao().isEmpty()) {
@@ -48,21 +48,32 @@ public class AnuncioService {
         if (images == null) {
             throw new BusinessRuleException("Adicione uma imagem ao anúncio!");
         }
-        var anuncio = new Anuncio(data, images, user);
-        images.forEach(imageRepository::save);
-        return repository.save(anuncio);
+        System.out.println("Print das imagens no create:");
+        images.forEach(System.out::println);
+
+        var anuncio = new Anuncio(data, user);
+        anuncio = repository.save(anuncio);
+        for (String nameImg : images) {
+            Images image = new Images(nameImg, anuncio);
+            imageRepository.save(image);
+        }
+
+        return anuncio;
     }
 
     @Transactional
-    public Anuncio updateAnuncio(@Valid DataUpdateAnuncio data, Long id, List<Images> images, User user) {
+    public Anuncio updateAnuncio(@Valid DataUpdateAnuncio data, Long id, List<String> images, User user) {
         var anuncio = repository.getReferenceById(id);
         var userCheck = new DataGetUser(user);
 
         if (!Objects.equals(anuncio.getUsuario(), userCheck)) {
             throw new BusinessRuleException("O usuário não pode alterar o anúncio de outro.");
         }
-        images.forEach(imageRepository::save);
-        return anuncio.updateAnuncio(data, images);
+
+        images.forEach(System.out::println);
+
+        System.out.println();
+        return anuncio.updateAnuncio(data);
     }
 
     @Transactional

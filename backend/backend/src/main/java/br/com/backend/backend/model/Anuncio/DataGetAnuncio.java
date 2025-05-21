@@ -19,8 +19,7 @@ public record DataGetAnuncio(
         Boolean disponivel,
         String cidade,
         Double avaliacao,
-        LocalDateTime dataCadastro,
-        List<String> urlImage
+        LocalDateTime dataCadastro
 ) {
     public DataGetAnuncio(Anuncio anuncio) {
         this(
@@ -34,11 +33,7 @@ public record DataGetAnuncio(
                 anuncio.getDisponivel(),
                 anuncio.getCidade(),
                 anuncio.getAvaliacao(),
-                anuncio.getDataCadastro(),
-                anuncio.getUrlImage()
-                        .stream()
-                        .map(Images::getNameImageFile)
-                        .collect(Collectors.toList())
+                anuncio.getDataCadastro()
         );
     }
 }

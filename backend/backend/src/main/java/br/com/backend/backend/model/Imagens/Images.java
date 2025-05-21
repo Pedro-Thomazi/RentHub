@@ -9,24 +9,25 @@ public class Images {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Long id;
-    private String nameImageFile;
+    @Column(name = "name_img_file", nullable = false)
+    private String nameImgFile;
     @ManyToOne
-    @JoinColumn(name = "anuncio_id")
+    @JoinColumn(name = "anuncio_id", nullable = false)
     private Anuncio anuncio;
 
     public Images(){}
 
     public Images(String nameImageFile, Anuncio anuncio) {
-        this.nameImageFile = nameImageFile;
+        this.nameImgFile = nameImageFile;
         this.anuncio = anuncio;
     }
 
-    public String getNameImageFile() {
-        return nameImageFile;
+    public String getNameImgFile() {
+        return nameImgFile;
     }
 
-    public void setNameImageFile(String nameImageFile) {
-        this.nameImageFile = nameImageFile;
+    public void setNameImgFile(String nameImageFile) {
+        this.nameImgFile = nameImageFile;
     }
 
     public Anuncio getAnuncio() {

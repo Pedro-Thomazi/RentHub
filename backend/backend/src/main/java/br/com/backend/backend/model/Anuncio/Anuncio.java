@@ -31,12 +31,13 @@ public class Anuncio {
     private LocalDateTime dataCadastro;
     private Double avaliacao;
     private String cidade;
-    @OneToMany(mappedBy = "anuncio", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
+    @JoinColumn(name = "anuncio_id")
     private List<Images> urlImage = new ArrayList<>();
 
     public Anuncio() {}
 
-    public Anuncio(DataCreateAnuncio data, List<Images> images, User user) {
+    public Anuncio(DataCreateAnuncio data, User user) {
         this.usuario = user;
         this.titulo = data.titulo();
         this.descricao = data.descricao();
@@ -47,10 +48,9 @@ public class Anuncio {
         this.dataCadastro = LocalDateTime.now();
         this.avaliacao = data.avaliacao();
         this.cidade = data.cidade();
-        this.urlImage.addAll(images);
     }
 
-    public Anuncio updateAnuncio(DataUpdateAnuncio data, List<Images> images) {
+    public Anuncio updateAnuncio(DataUpdateAnuncio data) {
         if (data.titulo() != null) {
             this.titulo = data.titulo();
         }
@@ -72,9 +72,6 @@ public class Anuncio {
         if (data.cidade() != null) {
             this.cidade = data.cidade();
         }
-        if (urlImage != null) {
-            this.urlImage.addAll(images);
-        }
         return this;
     }
 
@@ -88,14 +85,6 @@ public class Anuncio {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-    public List<Images> getUrlImage() {
-        return urlImage;
-    }
-
-    public void setUrlImage(List<Images> images) {
-        this.urlImage.addAll(images);
     }
 
     public DataGetUser getUsuario() {
