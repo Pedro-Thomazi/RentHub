@@ -30,7 +30,7 @@ interface DataAnnouncement {
   disponivel: boolean
   cidade: string
   avaliacao: number
-  urlImage: FileList | null
+  principalImage: FileList | null
 }
 
 const Home = () => {
@@ -43,6 +43,7 @@ const Home = () => {
   useEffect(() => {
     fetch("http://localhost:8080/top-anuncios").then(async (res) => {
       const data = await res.json()
+      console.log(data)
       setAnnouncements(data)
     })
     fetch("http://localhost:8080/hoteis/bests").then(async (res) => {
@@ -85,7 +86,7 @@ const Home = () => {
           <h2>Os mais bem avaliados</h2>
           <div className={styles.ofertas}>
             {announcements && announcements?.map((data) => (
-              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} url={`/${data.titulo}/${data.id}`} />
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.principalImage} url={`/${data.titulo}/${data.id}`} />
             ))}
           </div>
         </article>
@@ -95,21 +96,21 @@ const Home = () => {
           <br />
           <div className={styles.bests}>
             {hotels && hotels?.map((data) => (
-              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} url={`/${data.titulo}/${data.id}`} />
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.principalImage} url={`/${data.titulo}/${data.id}`} />
             ))}
           </div>
           <h1>Casas</h1>
           <br />
           <div className={styles.bests}>
             {homes && homes?.map((data) => (
-              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} url={`/${data.titulo}/${data.id}`} />
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.principalImage} url={`/${data.titulo}/${data.id}`} />
             ))}
           </div>
           <h1>Apartamentos</h1>
           <br />
           <div className={styles.bests}>
             {apartaments && apartaments?.map((data) => (
-              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} url={`/${data.titulo}/${data.id}`} />
+              <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.principalImage} url={`/${data.titulo}/${data.id}`} />
             ))}
           </div>
         </article>

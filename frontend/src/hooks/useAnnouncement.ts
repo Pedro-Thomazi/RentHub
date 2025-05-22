@@ -8,15 +8,15 @@ interface DataAnnouncement {
   endereco: string
   cidade: string
   avaliacao: number
-  urlImage: FileList | null
+  principalImage: FileList | null
 }
 
 
 export default function useAnnouncement() {
 
   async function create(announcement: DataAnnouncement, token: string, navigate: NavigateFunction) {
-    if (announcement.urlImage) {
-      console.log(announcement.urlImage[0])
+    if (announcement.principalImage) {
+      console.log(announcement.principalImage[0])
     }
     const formData = new FormData()
 
@@ -29,8 +29,8 @@ export default function useAnnouncement() {
       formData.append("cidade", announcement.cidade);
       formData.append("avaliacao", String(announcement.avaliacao));
 
-      if (announcement.urlImage && announcement.urlImage[0]) {
-        formData.append("urlImage", announcement.urlImage[0]); // Pega o primeiro item do FileList
+      if (announcement.principalImage && announcement.principalImage[0]) {
+        formData.append("urlImage", announcement.principalImage[0]); // Pega o primeiro item do FileList
       } else {
         alert("Selecione uma imagem.");
         return;
@@ -57,8 +57,8 @@ export default function useAnnouncement() {
   }
 
   async function update(id: number, announcement: DataAnnouncement, token: string, navigate: NavigateFunction) {
-    if (announcement.urlImage) {
-      console.log(announcement.urlImage[0])
+    if (announcement.principalImage) {
+      console.log(announcement.principalImage[0])
     }
     const formData = new FormData()
 
@@ -71,8 +71,8 @@ export default function useAnnouncement() {
       formData.append("cidade", announcement.cidade);
       formData.append("avaliacao", String(announcement.avaliacao));
 
-      if (announcement.urlImage && announcement.urlImage[0]) {
-        formData.append("urlImage", announcement.urlImage[0]); // Pega o primeiro item do FileList
+      if (announcement.principalImage && announcement.principalImage[0]) {
+        formData.append("urlImage", announcement.principalImage[0]); // Pega o primeiro item do FileList
       } else {
         alert("Selecione uma imagem.");
         return;

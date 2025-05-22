@@ -29,7 +29,7 @@ interface DataAnnouncement {
   disponivel: boolean
   cidade: string
   avaliacao: number
-  urlImage: FileList | null
+  principalImage: FileList | null
 }
 
 const Dashboard = () => {
@@ -90,7 +90,7 @@ const Dashboard = () => {
         <h2>Meus Anúncios</h2>
         <div>
           {myAnnouncements && myAnnouncements?.map((data) => (
-            <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} url={`/atualizar-anuncio/${data.titulo}/${data.id}`} />
+            <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.principalImage} url={`/atualizar-anuncio/${data.titulo}/${data.id}`} />
           ))}
         </div>
       </section>

@@ -25,7 +25,7 @@ interface DataAnnouncement {
   disponivel: boolean
   cidade: string
   avaliacao: number
-  urlImage: File | null
+  principalImage: File | null
 }
 
 const DetailsAnnouncement = () => {
@@ -50,7 +50,7 @@ const DetailsAnnouncement = () => {
     disponivel: false,
     cidade: "",
     avaliacao: 0,
-    urlImage: null
+    principalImage: null
   })
   const [token] = useState<string>(localStorage.getItem("token") || "")
 
@@ -98,7 +98,7 @@ const DetailsAnnouncement = () => {
         <p className={styles.localizacao}><FaLocationDot size={20} />{announcement?.endereco}</p>
         <div className={styles.content}>
           <div className={styles.images}>
-            <img className={styles.principalImage} src={`http://localhost:8080/uploads/images/${announcement?.urlImage}`} alt="/" />
+            <img className={styles.principalImage} src={`http://localhost:8080/uploads/images/${announcement?.principalImage}`} alt="/" />
             <div className={styles.anotherImages}>
               <img src="/" alt="/" />
               <img src="/" alt="/" />

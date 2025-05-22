@@ -12,7 +12,7 @@ interface DataAnnouncement {
   endereco: string
   avaliacao: number
   cidade: string
-  urlImage: FileList | null
+  principalImage: FileList | null
 }
 
 const CreateAnnouncement = () => {
@@ -27,7 +27,7 @@ const CreateAnnouncement = () => {
     endereco: "",
     avaliacao: 0,
     cidade: "",
-    urlImage: null,
+    principalImage: null,
   })
   const navigate = useNavigate()
 
