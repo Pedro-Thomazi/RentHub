@@ -48,6 +48,9 @@ public class AnuncioService {
         if (images == null) {
             throw new BusinessRuleException("Adicione uma imagem ao anúncio!");
         }
+        if (images.size() > 5) {
+            throw new BusinessRuleException("O número máximo de imagens por anúncio é [5]");
+        }
         System.out.println("Print das imagens no create:");
         images.forEach(System.out::println);
 
@@ -58,6 +61,7 @@ public class AnuncioService {
             imageRepository.save(image);
         }
 
+        anuncio.setPrincipalImage(images.getFirst());
         return anuncio;
     }
 
@@ -73,6 +77,11 @@ public class AnuncioService {
         images.forEach(System.out::println);
 
         System.out.println();
+        for (String nameImg : images) {
+            Images image = new Images(nameImg, anuncio);
+            imageRepository.save(image);
+        }
+        anuncio.setPrincipalImage(images.getFirst());
         return anuncio.updateAnuncio(data);
     }
 

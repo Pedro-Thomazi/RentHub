@@ -6,6 +6,7 @@ import br.com.backend.backend.model.Anuncio.DataGetAnuncio;
 import br.com.backend.backend.model.Anuncio.DataUpdateAnuncio;
 import br.com.backend.backend.model.Imagens.Images;
 import br.com.backend.backend.model.User.User;
+import br.com.backend.backend.repository.ImageRepository;
 import br.com.backend.backend.service.AnuncioService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +25,12 @@ import java.util.List;
 @CrossOrigin(origins = "http://localhost:5173")
 public class AnuncioController {
     private final AnuncioService anuncioService;
+    private final ImageRepository imageRepository;
     private static String pathImages = "uploads/images/";
 
-    public AnuncioController(AnuncioService anuncioService) {
+    public AnuncioController(AnuncioService anuncioService, ImageRepository imageRepository) {
         this.anuncioService = anuncioService;
+        this.imageRepository = imageRepository;
     }
 
     @GetMapping("/anuncios")
@@ -89,6 +92,7 @@ public class AnuncioController {
     @GetMapping("/anuncios/anuncio/{id}")
     public ResponseEntity getAnuncio(@PathVariable Long id) {
         Anuncio anuncio = anuncioService.getAnuncioByDisponivelTrue(id);
+        List<Images> images = imageRepository.getImagesByAnuncioId(id);
         return ResponseEntity.ok(new DataGetAnuncio(anuncio));
     }
 
@@ -108,13 +112,17 @@ public class AnuncioController {
             List<String> images = new ArrayList<>();
 
             for (MultipartFile file : files) {
-                if (!file.isEmpty()) {
-                    byte[] bytes = file.getBytes();
-                    String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
-                    Path path = Paths.get(pathImages + String.valueOf(nameImage));
-                    Files.write(path, bytes);
+                if (file.getSize() <= 5) {
+                    if (!file.isEmpty()) {
+                        byte[] bytes = file.getBytes();
+                        String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
+                        Path path = Paths.get(pathImages + String.valueOf(nameImage));
+                        Files.write(path, bytes);
 
-                    images.add(nameImage);
+                        images.add(nameImage);
+                    }
+                } else {
+                    return ResponseEntity.badRequest().body("Você está tentando adicionar muitas imagens. Máximo [5]");
                 }
             }
 
@@ -135,13 +143,17 @@ public class AnuncioController {
             List<String> images = new ArrayList<>();
 
             for (MultipartFile file : files) {
-                if (!file.isEmpty()) {
-                    byte[] bytes = file.getBytes();
-                    String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
-                    Path path = Paths.get(pathImages + String.valueOf(nameImage));
-                    Files.write(path, bytes);
+                if (file.getSize() <= 5) {
+                    if (!file.isEmpty()) {
+                        byte[] bytes = file.getBytes();
+                        String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
+                        Path path = Paths.get(pathImages + String.valueOf(nameImage));
+                        Files.write(path, bytes);
 
-                    images.add(nameImage);
+                        images.add(nameImage);
+                    }
+                } else {
+                    return ResponseEntity.badRequest().body("Você está tentando adicionar muitas imagens. Máximo [5]");
                 }
             }
 
