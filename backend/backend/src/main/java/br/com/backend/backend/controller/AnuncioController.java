@@ -93,7 +93,7 @@ public class AnuncioController {
     @GetMapping("/anuncios/anuncio/{id}")
     public ResponseEntity getAnuncio(@PathVariable Long id) {
         Anuncio anuncio = anuncioService.getAnuncioByDisponivelTrue(id);
-        List<Images> images = imageRepository.getImagesByAnuncioId(id);
+//        List<Images> images = imageRepository.getImagesByAnuncioId(id);
         return ResponseEntity.ok(new DataGetAnuncio(anuncio));
     }
 

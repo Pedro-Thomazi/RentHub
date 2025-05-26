@@ -51,20 +51,16 @@ public class AnuncioService {
         if (images.size() > 5) {
             throw new BusinessRuleException("O número máximo de imagens por anúncio é [5]");
         }
-        System.out.println("Print das imagens no create:");
         images.forEach(System.out::println);
 
         var anuncio = new Anuncio(data, user);
         anuncio = repository.save(anuncio);
-        System.out.println("Salvei a porra do anuncio sem a porra da imagem");
         for (String nameImg : images) {
             Images image = new Images(nameImg, anuncio);
             imageRepository.save(image);
-            System.out.println("Salvei as porras das images");
         }
 
         anuncio.setPrincipalImage(images.getFirst());
-        System.out.println("Fim dessa porra!");
         return anuncio;
     }
 

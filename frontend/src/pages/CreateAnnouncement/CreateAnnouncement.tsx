@@ -14,8 +14,6 @@ interface DataAnnouncement {
   cidade: string
 }
 
-type DataImage = File[] | null
-
 const CreateAnnouncement = () => {
   const { authenticated, create } = useAuthContext()
   const [token] = useState<string>(localStorage.getItem("token") || "")

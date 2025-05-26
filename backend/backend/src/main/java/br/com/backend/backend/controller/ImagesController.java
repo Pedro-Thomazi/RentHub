@@ -1,5 +1,6 @@
 package br.com.backend.backend.controller;
 
+import br.com.backend.backend.model.Anuncio.DataGetAnuncio;
 import br.com.backend.backend.model.Imagens.DataGetImages;
 import br.com.backend.backend.model.Imagens.Images;
 import br.com.backend.backend.repository.ImageRepository;
@@ -21,8 +22,10 @@ public class ImagesController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<DataGetImages> getImagesAnuncio(@PathVariable Long id) {
+    public ResponseEntity getImagesAnuncio(@PathVariable Long id) {
         List<Images> images = repository.getImagesByAnuncioId(id);
-        return ResponseEntity.ok(new DataGetImages((Images) images));
+        System.out.println("Pegando imagens");
+        List<DataGetImages> res = images.stream().map(DataGetImages::new).toList();
+        return ResponseEntity.ok(res);
     }
 }

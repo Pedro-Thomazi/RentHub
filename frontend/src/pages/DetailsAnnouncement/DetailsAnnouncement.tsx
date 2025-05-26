@@ -52,6 +52,8 @@ const DetailsAnnouncement = () => {
     avaliacao: 0,
     principalImage: null
   })
+
+  const [images, setImages] = useState<string>("")
   const [token] = useState<string>(localStorage.getItem("token") || "")
 
   useEffect(() => {
@@ -59,6 +61,12 @@ const DetailsAnnouncement = () => {
     fetch(`http://localhost:8080/anuncios/anuncio/${id}`).then(async (res) => {
       const data = await res.json()
       setAnnouncement(data)
+      console.log(data)
+    })
+
+    fetch(`http://localhost:8080/images/${id}`).then(async (res) => {
+      const data = await res.json()
+      setImages(data)
       console.log(data)
     })
 
