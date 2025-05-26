@@ -8,15 +8,16 @@ interface DataAnnouncement {
   endereco: string
   cidade: string
   avaliacao: number
-  principalImage: FileList | null
 }
+
+type DataImage = File[] | null
 
 
 export default function useAnnouncement() {
 
-  async function create(announcement: DataAnnouncement, token: string, navigate: NavigateFunction) {
-    if (announcement.principalImage) {
-      console.log(announcement.principalImage[0])
+  async function create(announcement: DataAnnouncement, urlImage: DataImage, token: string, navigate: NavigateFunction) {
+    if (urlImage) {
+      console.log(urlImage)
     }
     const formData = new FormData()
 
@@ -29,14 +30,15 @@ export default function useAnnouncement() {
       formData.append("cidade", announcement.cidade);
       formData.append("avaliacao", String(announcement.avaliacao));
 
-      if (announcement.principalImage && announcement.principalImage[0]) {
-        formData.append("urlImage", announcement.principalImage[0]); // Pega o primeiro item do FileList
+      if (urlImage && urlImage.length > 0) {
+        Array.from(urlImage).forEach(file => {
+          console.log("Dentro do for" + file)
+          formData.append("urlImage", file)
+        })
       } else {
         alert("Selecione uma imagem.");
         return;
       }
-
-      console.log(announcement)
 
       await fetch("http://localhost:8080/create-anuncio", {
         method: "POST",
@@ -56,9 +58,9 @@ export default function useAnnouncement() {
     }
   }
 
-  async function update(id: number, announcement: DataAnnouncement, token: string, navigate: NavigateFunction) {
-    if (announcement.principalImage) {
-      console.log(announcement.principalImage[0])
+  async function update(id: number, announcement: DataAnnouncement, urlImage: DataImage, token: string, navigate: NavigateFunction) {
+    if (urlImage) {
+      console.log(urlImage)
     }
     const formData = new FormData()
 
@@ -71,8 +73,8 @@ export default function useAnnouncement() {
       formData.append("cidade", announcement.cidade);
       formData.append("avaliacao", String(announcement.avaliacao));
 
-      if (announcement.principalImage && announcement.principalImage[0]) {
-        formData.append("urlImage", announcement.principalImage[0]); // Pega o primeiro item do FileList
+      if (urlImage && urlImage[0]) {
+        formData.append("urlImage", urlImage[0]); // Pega o primeiro item do FileList
       } else {
         alert("Selecione uma imagem.");
         return;

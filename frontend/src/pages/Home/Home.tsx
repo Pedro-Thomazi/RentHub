@@ -43,7 +43,6 @@ const Home = () => {
   useEffect(() => {
     fetch("http://localhost:8080/top-anuncios").then(async (res) => {
       const data = await res.json()
-      console.log(data)
       setAnnouncements(data)
     })
     fetch("http://localhost:8080/hoteis/bests").then(async (res) => {

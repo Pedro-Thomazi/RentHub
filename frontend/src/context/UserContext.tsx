@@ -31,8 +31,9 @@ interface DataAnnouncement {
   endereco: string
   cidade: string
   avaliacao: number
-  principalImage: FileList | null
 }
+
+type DataImage = File[] | null
 
 interface AuthContextType {
   authenticated?: boolean
@@ -42,8 +43,8 @@ interface AuthContextType {
   logout: () => Promise<void>
 
   // Para o Anúncio
-  create: (announcement: DataAnnouncement, token: string, navigate: NavigateFunction) => Promise<void>
-  update: (id: number, announcement: DataAnnouncement, token: string, navigate: NavigateFunction) => Promise<void>
+  create: (announcement: DataAnnouncement, urlImage: DataImage, token: string, navigate: NavigateFunction) => Promise<void>
+  update: (id: number, announcement: DataAnnouncement, urlImage: DataImage, token: string, navigate: NavigateFunction) => Promise<void>
 }
 
 const Context = createContext<AuthContextType | undefined>(undefined)

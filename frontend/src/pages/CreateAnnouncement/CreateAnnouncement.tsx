@@ -12,8 +12,9 @@ interface DataAnnouncement {
   endereco: string
   avaliacao: number
   cidade: string
-  principalImage: FileList | null
 }
+
+type DataImage = File[] | null
 
 const CreateAnnouncement = () => {
   const { authenticated, create } = useAuthContext()
@@ -26,9 +27,9 @@ const CreateAnnouncement = () => {
     tipoImovel: "",
     endereco: "",
     avaliacao: 0,
-    cidade: "",
-    principalImage: null,
+    cidade: ""
   })
+  const [urlImage, setUrlImage] = useState<File[] | null>(null)
   const navigate = useNavigate()
 
   function handleChange(e: ChangeEvent<HTMLInputElement | HTMLSelectElement>) {
@@ -36,10 +37,10 @@ const CreateAnnouncement = () => {
   }
 
   function handleImage(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.files) {
+    if (e.target.files && e.target.files.length > 0) {
       setPreviewImg(Array.from(e.target.files))
+      setUrlImage(Array.from(e.target.files))
     }
-    setAnnouncement({ ...announcement, [e.target.name]: e.target.files })
   }
 
   useEffect(() => {
@@ -48,7 +49,8 @@ const CreateAnnouncement = () => {
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    create(announcement, token, navigate)
+    console.log(announcement)
+    create(announcement, urlImage, token, navigate)
   }
   return (
     <main className={styles.containerCreate}>
@@ -83,7 +85,7 @@ const CreateAnnouncement = () => {
           <input onChange={handleChange} type="text" name='cidade' placeholder='Cidade' required />
         </label>
         <label>
-          <input onChange={handleImage} type="file" name='urlImage' required />
+          <input onChange={handleImage} multiple type="file" name='urlImage' required />
         </label>
         <div className={styles.containerImagesPrev}>
           {previewImg.map((image, index) => (

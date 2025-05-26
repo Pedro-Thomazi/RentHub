@@ -20,7 +20,7 @@ public class TokenService {
             return JWT.create()
                     .withIssuer("renthub")
                     .withSubject(user.getUsername())
-                    .withExpiresAt(expiration(30))
+                    .withExpiresAt(expiration(120))
                     .sign(algorithm);
         } catch (JWTCreationException ex) {
             throw new BusinessRuleException("Erro ao gerar token JWT");
@@ -40,7 +40,7 @@ public class TokenService {
         }
     }
 
-    private Instant expiration(Integer days) {
-        return LocalDateTime.now().plusDays(days).toInstant(ZoneOffset.of("-03:00"));
+    private Instant expiration(Integer minutes) {
+        return LocalDateTime.now().plusMinutes(minutes).toInstant(ZoneOffset.of("-03:00"));
     }
 }

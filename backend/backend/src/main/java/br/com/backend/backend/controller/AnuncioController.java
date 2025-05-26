@@ -18,6 +18,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @RestController
@@ -112,7 +113,7 @@ public class AnuncioController {
             List<String> images = new ArrayList<>();
 
             for (MultipartFile file : files) {
-                if (file.getSize() <= 5) {
+                if (files.length <= 5) {
                     if (!file.isEmpty()) {
                         byte[] bytes = file.getBytes();
                         String nameImage = System.currentTimeMillis() + file.getOriginalFilename();
@@ -143,7 +144,7 @@ public class AnuncioController {
             List<String> images = new ArrayList<>();
 
             for (MultipartFile file : files) {
-                if (file.getSize() <= 5) {
+                if (files.length <= 5) {
                     if (!file.isEmpty()) {
                         byte[] bytes = file.getBytes();
                         String nameImage = System.currentTimeMillis() + file.getOriginalFilename();

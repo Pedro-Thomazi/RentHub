@@ -43,7 +43,7 @@ export default function useAuth() {
 
         localStorage.removeItem("token")
         delete axios.defaults.headers.common["Authorization"]
-      }, 30 * 60 * 1000)
+      }, 120 * 60 * 1000)
 
       return () => clearTimeout(logoutTimer)
     }
