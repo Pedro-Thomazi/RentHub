@@ -32,6 +32,7 @@ const UpdateAnnouncement = () => {
     urlImage: null,
   })
   const [previewImg, setPreviewImg] = useState<File[]>([])
+  const [opennig, setOpennig] = useState<boolean>(false)
   const [img, setImg] = useState<string>("")
   const navigate = useNavigate()
   const { id } = useParams()
@@ -62,6 +63,14 @@ const UpdateAnnouncement = () => {
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
     update(announcement.id, announcement, token, navigate)
+  }
+
+  function openPopup() {
+    setOpennig(true)
+  }
+
+  function closePopup() {
+    setOpennig(false)
   }
   return (
     <main className={styles.containerCreate}>
@@ -106,6 +115,15 @@ const UpdateAnnouncement = () => {
         </div>
         <button type='submit'>Atualizar</button>
       </form>
+      <button className={styles.btnDesative} onClick={openPopup}>Desativar anúncio</button>
+      <div className={`${opennig ? styles.openPop : "" } ${styles.popup}`}>
+        <h1>Desativar Anúncio</h1>
+        <p>Você tem certeza que quer desativar esse anúncio</p>
+        <div className={styles.actionsPop}>
+          <button onClick={closePopup} className={`${styles.btnAction} ${styles.btnCancel}`}>Cancelar</button>
+          <button className={`${styles.btnAction} ${styles.btnDesativePop}`}>Desativar</button>
+        </div>
+      </div>
     </main>
   )
 }

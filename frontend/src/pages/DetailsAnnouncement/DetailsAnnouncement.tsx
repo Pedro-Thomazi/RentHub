@@ -28,6 +28,15 @@ interface DataAnnouncement {
   principalImage: File | null
 }
 
+interface DataImages {
+  idImage: number
+  idAnuncio: number
+  tituloAnuncio: string
+  descricaoAnuncio: string
+  tipoAnuncio: string
+  nameImgFile: string
+}
+
 const DetailsAnnouncement = () => {
   const { authenticated } = useAuthContext()
   const { id } = useParams()
@@ -53,7 +62,8 @@ const DetailsAnnouncement = () => {
     principalImage: null
   })
 
-  const [images, setImages] = useState<string>("")
+  const [images, setImages] = useState<DataImages[]>([])
+  const [imgSetted, setImgSetted] = useState<string>("")
   const [token] = useState<string>(localStorage.getItem("token") || "")
 
   useEffect(() => {
@@ -61,13 +71,12 @@ const DetailsAnnouncement = () => {
     fetch(`http://localhost:8080/anuncios/anuncio/${id}`).then(async (res) => {
       const data = await res.json()
       setAnnouncement(data)
-      console.log(data)
     })
 
     fetch(`http://localhost:8080/images/${id}`).then(async (res) => {
       const data = await res.json()
       setImages(data)
-      console.log(data)
+      setImgSetted(data[0].nameImgFile)
     })
 
     if (token) {
@@ -83,7 +92,13 @@ const DetailsAnnouncement = () => {
         })
       })
     }
+
   }, [token])
+
+  function changeImg(index:number) {
+    setImgSetted(images[index].nameImgFile)
+  }
+
   return (
     <main className={styles.detailsContainer}>
       <header>
@@ -106,11 +121,11 @@ const DetailsAnnouncement = () => {
         <p className={styles.localizacao}><FaLocationDot size={20} />{announcement?.endereco}</p>
         <div className={styles.content}>
           <div className={styles.images}>
-            <img className={styles.principalImage} src={`http://localhost:8080/uploads/images/${announcement?.principalImage}`} alt="/" />
+            <img className={styles.principalImage} src={`http://localhost:8080/uploads/images/${imgSetted}`} alt="/" />
             <div className={styles.anotherImages}>
-              <img src="/" alt="/" />
-              <img src="/" alt="/" />
-              <img src="/" alt="/" />
+              {images && images.map((data, index) => (
+                <img key={data?.idImage} src={`http://localhost:8080/uploads/images/${data?.nameImgFile}`} alt={`Foto do anúncio ${data?.tituloAnuncio}`} onClick={() => changeImg(index)} />
+              ))}
             </div>
           </div>
           <div className={styles.details}>
