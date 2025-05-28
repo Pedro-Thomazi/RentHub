@@ -135,4 +135,8 @@ public class AnuncioService {
     public List<Anuncio> getBestsAparatamentosDisponiveis() {
         return repository.findTwoBestsAparatamentosDisponiveis();
     }
+
+    public List<Anuncio> findByQuery(String query, String query1, String query2) {
+        return repository.findByTituloContainingIgnoreCaseOrDescricaoContainingIgnoreCaseOrCidadeContainingIgnoreCase(query, query, query);
+    }
 }

@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import styles from './Header.module.scss'
 
 // Icons
@@ -8,7 +8,7 @@ import { FaSearch, FaUserCircle } from "react-icons/fa";
 
 import Logo from '../Logo/Logo';
 import { useAuthContext } from '../../context/UserContext';
-import { useEffect, useState } from 'react';
+import { ChangeEvent, FormEvent, useEffect, useState } from 'react';
 import axios from 'axios';
 
 interface DataUser {
@@ -30,6 +30,8 @@ const Header = ({ tipo, principalText, secondaryText }: DataHeaderText) => {
   })
   const [token] = useState<string>(localStorage.getItem("token") || "")
   const [openSearch, setOpenSearch] = useState<string>("")
+  const navigate = useNavigate()
+  const [query, setQuery] = useState<string>("")
 
   function openSearchMenu() {
     if (openSearch == "") {
@@ -98,6 +100,12 @@ const Header = ({ tipo, principalText, secondaryText }: DataHeaderText) => {
     }
   }
 
+  function search(e: FormEvent) {
+    e.preventDefault()
+
+    navigate("/anuncios/search?q=" + query)
+  }
+
   return (
     <header className={styles.headerContainer}>
       <section className={styles.primarySection}>
@@ -108,8 +116,8 @@ const Header = ({ tipo, principalText, secondaryText }: DataHeaderText) => {
             <Link to={"/"}>Alugar</Link>
             <Link to={"/criar-anuncio"}>Anúnciar</Link>
 
-            <form className={`${styles.searchForm} ${openSearch}`}>
-              <input type="search" name="" id="" placeholder='Buscar...' />
+            <form onSubmit={search} className={`${styles.searchForm} ${openSearch}`}>
+              <input type="search" onChange={(e:ChangeEvent<HTMLInputElement>) => setQuery(e.target.value)} name="search" id="search" placeholder='Buscar...' />
             </form>
             <FaSearch onClick={openSearchMenu} size={25} />
           </nav>

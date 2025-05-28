@@ -1,0 +1,22 @@
+.mainContainer {
+  padding: 20px;
+  .ofertasContainer {
+
+    .ofertas {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .bests {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+
+      a {
+        width: auto;
+      }
+    }
+  }
+}

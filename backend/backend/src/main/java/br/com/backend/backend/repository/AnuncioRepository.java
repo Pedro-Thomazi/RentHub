@@ -37,4 +37,6 @@ public interface AnuncioRepository extends JpaRepository<Anuncio, Long> {
 //  Query para pegar os quatro mais bem avaliados
     @Query(value = "SELECT a FROM Anuncio a WHERE a.disponivel = true ORDER BY a.avaliacao DESC LIMIT 4")
     List<Anuncio> findTop4ByDisponivelTrueOrderByAvaliacaoDesc();
+
+    List<Anuncio> findByTituloContainingIgnoreCaseOrDescricaoContainingIgnoreCaseOrCidadeContainingIgnoreCase(String titulo, String descricao, String cidade);
 }

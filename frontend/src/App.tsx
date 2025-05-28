@@ -13,6 +13,7 @@ import PageHomes from "./pages/PageAnnouncements/PageHomes"
 import PageApartaments from "./pages/PageAnnouncements/PageApartaments"
 import PageAnnouncements from "./pages/PageAnnouncements/PageAnnouncements"
 import UpdateAnnouncement from "./pages/UpdateAnnouncement/UpdateAnnouncement"
+import PageSearch from "./pages/PageSearch/PageSearch"
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
             <Route path="casas" element={<PageHomes />} />
             <Route path="apartamentos" element={<PageApartaments />} />
           </Route>
+          <Route path="/anuncios/search" element={<PageSearch />} />
 
         </Routes>
       </BrowserRouter>

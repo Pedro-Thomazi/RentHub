@@ -24,7 +24,7 @@ interface DataAnnouncement {
   disponivel: boolean
   cidade: string
   avaliacao: number
-  urlImage: string
+  principalImage: FileList | null
 }
 const PageHomes = () => {
   const [token] = useState<string>(localStorage.getItem("token") || "")
@@ -40,7 +40,7 @@ const PageHomes = () => {
   return (
     <div className={styles.ofertas}>
       {homes && homes?.map((data) => (
-        <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.urlImage} />
+        <CardOfertas key={data.id} id={data.id} titulo={data.titulo} preco={data.preco} localizacao={data.cidade} avaliacao={data.avaliacao} disponivel={data.disponivel} urlImage={data.principalImage} url={`/${data.titulo}/${data.id}`} />
       ))}
     </div>
   )

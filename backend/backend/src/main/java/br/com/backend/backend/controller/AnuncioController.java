@@ -41,6 +41,13 @@ public class AnuncioController {
         return ResponseEntity.ok(res);
     }
 
+    @GetMapping("/search")
+    public ResponseEntity getAnunciosBySearch(@RequestParam String query) {
+        List<Anuncio> anuncios = anuncioService.findByQuery(query, query, query);
+        List<DataGetAnuncio> res = anuncios.stream().map(DataGetAnuncio::new).toList();
+        return ResponseEntity.ok(res);
+    }
+
     @GetMapping("/top-anuncios")
     public ResponseEntity getTopFourAnuncios() {
         List<Anuncio> anuncios = anuncioService.getTopFourAnunciosByDisponivelTrue();

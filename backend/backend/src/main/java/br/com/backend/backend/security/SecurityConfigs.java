@@ -36,7 +36,8 @@ public class SecurityConfigs {
                             req.requestMatchers(HttpMethod.GET, "/images/**").permitAll();
                             req.requestMatchers(HttpMethod.POST, "/register").permitAll();
                             req.requestMatchers(HttpMethod.POST, "/login").permitAll();
-                            req.requestMatchers(HttpMethod.GET, "/anuncios").permitAll();
+                            req.requestMatchers(HttpMethod.GET, "/anuncios/**").permitAll();
+                            req.requestMatchers(HttpMethod.GET, "/search").permitAll();
                             req.requestMatchers(HttpMethod.GET, "/top-anuncios").permitAll();
                             req.requestMatchers(HttpMethod.GET, "/hoteis/**").permitAll();
                             req.requestMatchers(HttpMethod.GET, "/casas/**").permitAll();
