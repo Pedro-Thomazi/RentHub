@@ -13,12 +13,11 @@ interface DataAnnouncement {
   endereco: string
   avaliacao: number
   cidade: string
-  urlImage: FileList | null
 }
 
 
 const UpdateAnnouncement = () => {
-  const { authenticated, update } = useAuthContext()
+  const { authenticated, update, desative } = useAuthContext()
   const [token] = useState<string>(localStorage.getItem("token") || "")
   const [announcement, setAnnouncement] = useState<DataAnnouncement>({
     id: 0,
@@ -28,12 +27,12 @@ const UpdateAnnouncement = () => {
     tipoImovel: "",
     endereco: "",
     avaliacao: 0,
-    cidade: "",
-    urlImage: null,
+    cidade: ""
   })
   const [previewImg, setPreviewImg] = useState<File[]>([])
   const [opennig, setOpennig] = useState<boolean>(false)
   const [img, setImg] = useState<string>("")
+  const [urlImage, setUrlImage] = useState<File[] | null>(null)
   const navigate = useNavigate()
   const { id } = useParams()
 
@@ -56,13 +55,13 @@ const UpdateAnnouncement = () => {
   function handleImage(e: ChangeEvent<HTMLInputElement>) {
     if (e.target.files) {
       setPreviewImg(Array.from(e.target.files))
+      setUrlImage(Array.from(e.target.files))
     }
-    setAnnouncement({ ...announcement, [e.target.name]: e.target.files })
   }
 
   function handleSubmit(e: FormEvent) {
     e.preventDefault()
-    update(announcement.id, announcement, token, navigate)
+    update(announcement.id, announcement, urlImage, token, navigate)
   }
 
   function openPopup() {
@@ -121,7 +120,7 @@ const UpdateAnnouncement = () => {
         <p>Você tem certeza que quer desativar esse anúncio</p>
         <div className={styles.actionsPop}>
           <button onClick={closePopup} className={`${styles.btnAction} ${styles.btnCancel}`}>Cancelar</button>
-          <button className={`${styles.btnAction} ${styles.btnDesativePop}`}>Desativar</button>
+          <button onClick={() => desative(announcement?.id, token, navigate)} className={`${styles.btnAction} ${styles.btnDesativePop}`}>Desativar</button>
         </div>
       </div>
     </main>

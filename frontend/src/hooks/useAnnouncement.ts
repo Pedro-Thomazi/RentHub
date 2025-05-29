@@ -73,8 +73,11 @@ export default function useAnnouncement() {
       formData.append("cidade", announcement.cidade);
       formData.append("avaliacao", String(announcement.avaliacao));
 
-      if (urlImage && urlImage[0]) {
-        formData.append("urlImage", urlImage[0]); // Pega o primeiro item do FileList
+      if (urlImage && urlImage.length > 0) {
+        Array.from(urlImage).forEach(file => {
+          console.log("Dentro do for" + file)
+          formData.append("urlImage", file)
+        })
       } else {
         alert("Selecione uma imagem.");
         return;
@@ -100,8 +103,20 @@ export default function useAnnouncement() {
     }
   }
 
+  async function desative(id: number, token: string, navigate: NavigateFunction) {
+    await fetch(`http://localhost:8080/unavailable-anuncio/${id}`, {
+      method: "DELETE",
+      headers: {
+        Authorization: `Bearer ${JSON.parse(token)}`
+      }
+    })
+
+    await navigate("/dashboard")
+  }
+
   return {
     create,
-    update
+    update,
+    desative
   }
 }

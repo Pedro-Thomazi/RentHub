@@ -45,16 +45,18 @@ interface AuthContextType {
   // Para o Anúncio
   create: (announcement: DataAnnouncement, urlImage: DataImage, token: string, navigate: NavigateFunction) => Promise<void>
   update: (id: number, announcement: DataAnnouncement, urlImage: DataImage, token: string, navigate: NavigateFunction) => Promise<void>
+  desative: (id: number, token: string, navigate: NavigateFunction) => Promise<void>
+  
 }
 
 const Context = createContext<AuthContextType | undefined>(undefined)
 
 function UserProvider({ children }: { children: ReactNode }) {
   const { authenticated, login, register, updateUser, logout } = useAuth()
-  const { create, update } = useAnnouncement()
+  const { create, update, desative } = useAnnouncement()
 
   return (
-    <Context.Provider value={{ authenticated, login, register, updateUser, logout, create, update }}>
+    <Context.Provider value={{ authenticated, login, register, updateUser, logout, create, update, desative }}>
       {children}
     </Context.Provider>
   )
