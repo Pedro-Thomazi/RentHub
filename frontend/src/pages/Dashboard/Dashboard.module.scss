@@ -14,8 +14,14 @@
       width: 100%;
 
       .btnHamb {
-        border: none;
+        border: 1px solid transparent;
+        border-radius: 5px;
         background-color: transparent;
+        transition: .5s;
+
+        &:hover {
+          border-color: #111;
+        }
       }
 
       .optionUser {

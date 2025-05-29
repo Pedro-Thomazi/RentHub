@@ -15,6 +15,15 @@ interface DataAnnouncement {
   cidade: string
 }
 
+interface DataImage {
+  descricaoAnuncio: string
+  idAnuncio: number
+  idImage: number
+  nameImgFile: string
+  tipoAnuncio: string
+  tituloAnuncio: string
+}
+
 
 const UpdateAnnouncement = () => {
   const { authenticated, update, desative } = useAuthContext()
@@ -31,7 +40,7 @@ const UpdateAnnouncement = () => {
   })
   const [previewImg, setPreviewImg] = useState<File[]>([])
   const [opennig, setOpennig] = useState<boolean>(false)
-  const [img, setImg] = useState<string>("")
+  const [imgs, setImgs] = useState<DataImage[]>([])
   const [urlImage, setUrlImage] = useState<File[] | null>(null)
   const navigate = useNavigate()
   const { id } = useParams()
@@ -40,7 +49,11 @@ const UpdateAnnouncement = () => {
     fetch(`http://localhost:8080/anuncios/anuncio/${id}`).then(async (res) => {
       const data = await res.json()
       setAnnouncement(data)
-      setImg(`http://localhost:8080/uploads/images/${data.urlImage}`)
+    })
+    fetch(`http://localhost:8080/images/${id}`).then(async (res) => {
+      const data = await res.json()
+      setImgs(data)
+      console.log(data)
     })
   }, [token])
 
@@ -78,13 +91,13 @@ const UpdateAnnouncement = () => {
       <form className={styles.formAnnouncement} onSubmit={handleSubmit}>
         <h1>O que você quer anúnciar?</h1>
         <label>
-          <input value={announcement.titulo} onChange={handleChange} type="text" name='titulo' placeholder='Título' required />
+          <input value={announcement.titulo} onChange={handleChange} type="text" name='titulo' placeholder='Título'  />
         </label>
         <label>
-          <input value={announcement.descricao} onChange={handleChange} type="text" name='descricao' placeholder='Descrição' required />
+          <input value={announcement.descricao} onChange={handleChange} type="text" name='descricao' placeholder='Descrição'  />
         </label>
         <label>
-          <input value={announcement.preco} onChange={handleChange} type="number" step={"0.010"} name='preco' placeholder='Preço' required />
+          <input value={announcement.preco} onChange={handleChange} type="number" step={"0.010"} name='preco' placeholder='Preço'  />
         </label>
         <label>
           <select value={announcement.tipoImovel} onChange={handleChange} name="tipoImovel" id="tipoImovel">
@@ -95,27 +108,29 @@ const UpdateAnnouncement = () => {
           </select>
         </label>
         <label>
-          <input value={announcement.endereco} onChange={handleChange} type="text" name='endereco' placeholder='Endereço' required />
+          <input value={announcement.endereco} onChange={handleChange} type="text" name='endereco' placeholder='Endereço'  />
         </label>
         <label>
-          <input value={announcement.avaliacao} onChange={handleChange} type="text" name='avaliacao' placeholder='Avaliações' required />
+          <input value={announcement.avaliacao} onChange={handleChange} type="text" name='avaliacao' placeholder='Avaliações'  />
         </label>
         <label>
-          <input value={announcement.cidade} onChange={handleChange} type="text" name='cidade' placeholder='Cidade' required />
+          <input value={announcement.cidade} onChange={handleChange} type="text" name='cidade' placeholder='Cidade'  />
         </label>
         <label>
-          <input onChange={handleImage} type="file" name='urlImage' required />
+          <input onChange={handleImage} multiple type="file" name='urlImage'  />
         </label>
         <div className={styles.containerImagesPrev}>
           {previewImg.map((image, index) => (
             <img className={styles.imgPreview} src={URL.createObjectURL(image)} alt={`Minha foto ${index + 1}`} key={index} />
           ))}
-          <img className={styles.imgPreview} src={img} alt={`Minha foto`} />
+          {imgs.map((img, index) => (
+            <img key={index} className={styles.imgPreview} src={`http://localhost:8080/uploads/images/${img.nameImgFile}`} alt={`Minha foto ${index + 1}`} />
+          ))}
         </div>
         <button type='submit'>Atualizar</button>
       </form>
       <button className={styles.btnDesative} onClick={openPopup}>Desativar anúncio</button>
-      <div className={`${opennig ? styles.openPop : "" } ${styles.popup}`}>
+      <div className={`${opennig ? styles.openPop : ""} ${styles.popup}`}>
         <h1>Desativar Anúncio</h1>
         <p>Você tem certeza que quer desativar esse anúncio</p>
         <div className={styles.actionsPop}>

@@ -78,9 +78,6 @@ export default function useAnnouncement() {
           console.log("Dentro do for" + file)
           formData.append("urlImage", file)
         })
-      } else {
-        alert("Selecione uma imagem.");
-        return;
       }
 
       console.log(announcement)

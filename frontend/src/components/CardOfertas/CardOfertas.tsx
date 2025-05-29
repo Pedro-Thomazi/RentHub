@@ -16,7 +16,7 @@ interface DataCard extends DataAnnouncement {
 }
 
 
-const CardOfertas = ({ id, titulo, preco, localizacao, avaliacao, disponivel, urlImage, url }: DataCard) => {
+const CardOfertas = ({ titulo, preco, localizacao, avaliacao, disponivel, urlImage, url }: DataCard) => {
   return (
     <Link className={styles.card} to={url}>
       <img src={`http://localhost:8080/uploads/images/${urlImage}`} alt={titulo + " foto"} />
