@@ -19,3 +19,11 @@ html {
   scrollbar-width: 100px;
   scroll-behavior: smooth;
 }
+
+body {
+  overflow-x: hidden;
+}
+
+button {
+  cursor: pointer;
+}

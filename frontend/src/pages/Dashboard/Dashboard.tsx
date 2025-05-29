@@ -5,7 +5,9 @@ import axios from 'axios'
 import { Link, useNavigate } from 'react-router-dom'
 import Logo from '../../components/Logo/Logo'
 
-import { MdNotificationsActive, MdKingBed, MdHomeWork } from "react-icons/md";
+import { MdNotificationsActive, MdKingBed, MdHomeWork, MdExitToApp } from "react-icons/md";
+import { IoMdClose } from "react-icons/io";
+import { BsList, BsTools } from "react-icons/bs";
 import CardOfertas from '../../components/CardOfertas/CardOfertas'
 
 interface DataUser {
@@ -33,6 +35,7 @@ interface DataAnnouncement {
 }
 
 const Dashboard = () => {
+  const [open, setOpen] = useState<boolean>(false)
   const { authenticated, logout } = useAuthContext()
   const [user, setUser] = useState<DataUser>({
     id: 0,
@@ -72,14 +75,27 @@ const Dashboard = () => {
     }
   }, [token])
 
+  function actionMenuHamb() {
+    if (open) {
+      setOpen(false)
+    } else {
+      setOpen(true)
+    }
+  }
+
   return (
     <main className={styles.containeDashboard}>
       <header>
-        <div>
+        <div className={styles.containerLogo}>
           <Logo />
-          <button onClick={() => logout()} className={styles.btnLogout}>Sair</button>
+          <button onClick={actionMenuHamb} className={styles.btnHamb}><BsList size={50} /></button>
+          <div className={`${open ? styles.open : ""} ${styles.optionUser}`}>
+            <button onClick={actionMenuHamb} className={styles.btnCloseHamb}><IoMdClose size={40} />Fechar</button>
+            <Link to={"/atualizar-meus-dados"}><BsTools />Atualizar dados</Link>
+            <button onClick={() => logout()} className={styles.btnLogout}><MdExitToApp />Sair</button>
+          </div>
         </div>
-        <h1>Olá, {user.name}. <Link to={"/atualizar-meus-dados"}>Atualizar dados</Link></h1>
+        <h1>Olá, {user.name}</h1>
         <nav>
           <a href=""><MdKingBed /><span>Minhas reservas</span></a>
           <a href="#anuncios"><MdHomeWork /><span>Meus anúncios</span></a>

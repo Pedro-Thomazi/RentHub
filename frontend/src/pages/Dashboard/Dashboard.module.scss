@@ -5,31 +5,72 @@
     justify-content: space-between;
     width: 100%;
     height: 50vh;
-    background-color: #3B5D4F;
+    background: linear-gradient(45deg, #3b515d 60%, #6496b1);
     padding: 10px 150px;
 
-    div {
+    div.containerLogo {
       display: flex;
       justify-content: space-between;
       width: 100%;
 
-      .btnLogout {
-        cursor: pointer;
-        font-weight: 500;
-        font-size: 1.2rem;
-        width: 150px;
-        background-color: #a83535;
-        border: 1px solid #a83535;
-        color: #fff;
-        border-radius: 5px;
+      .btnHamb {
+        border: none;
+        background-color: transparent;
+      }
+
+      .optionUser {
+        position: absolute;
+        right: 0px;
+        top: 0px;
+        display: flex;
+        flex-direction: column;
+        background-color: #3b515d;
+        width: 350px;
+        transform: translateX(100%);
         transition: .5s;
 
-        &:hover {
+        &.open {
+          transform: translateX(0%);
+        }
+
+        button,
+        a {
+
+          display: flex;
+          align-items: center;
+          gap: 5px;
+          padding: 5px;
+          text-align: start;
+          font-size: 1.4rem;
           background-color: transparent;
-          color: #a83535;
-          border-radius: 10px;
+          border: none;
+        }
+
+        .btnCloseHamb {
+          text-align: center;
+          color: #fff;
+        }
+
+        a {
+          color: #FAAD1B;
+        }
+
+        .btnLogout {
+          font-weight: 500;
+          background-color: #a83535;
+          border: 1px solid #a83535;
+          color: #fff;
+          transition: .5s;
+
+          &:hover {
+            background-color: transparent;
+            color: #a83535;
+            border-radius: 10px;
+          }
         }
       }
+
+
     }
 
     h1 {
@@ -89,14 +130,14 @@
       width: 100%;
       height: 100vh;
       padding: 10px;
-  
+
       div {
         display: flex;
         justify-content: space-between;
         width: 100%;
-  
+
         .btnLogout {
-          cursor: pointer;
+
           font-weight: 500;
           font-size: 1.2rem;
           width: 150px;
@@ -105,7 +146,7 @@
           color: #fff;
           border-radius: 5px;
           transition: .5s;
-  
+
           &:hover {
             background-color: transparent;
             color: #a83535;
@@ -118,7 +159,7 @@
         display: flex;
         align-self: center;
         gap: 5px;
-  
+
         a {
           display: flex;
           align-items: center;
@@ -134,7 +175,7 @@
           span {
             display: none;
           }
-  
+
           svg {
             font-size: 2rem;
           }
@@ -148,12 +189,12 @@
   .containeDashboard {
     .myAnuncios {
       padding: 50px 10px;
-  
+
       h2 {
         font-size: 2rem;
         margin: 10px 0;
       }
-  
+
       div {
         display: flex;
         flex-wrap: wrap;
