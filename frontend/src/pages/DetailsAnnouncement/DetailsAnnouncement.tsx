@@ -4,7 +4,7 @@ import { useAuthContext } from '../../context/UserContext'
 import styles from './DetailsAnnouncement.module.scss'
 import axios from 'axios'
 import { Link, useParams } from 'react-router-dom'
-import { FaUserCircle } from 'react-icons/fa'
+import { FaUserCircle, FaStar, FaStarHalfAlt } from 'react-icons/fa'
 import { MdLogin } from 'react-icons/md'
 import { FaLocationDot } from "react-icons/fa6";
 
@@ -95,7 +95,7 @@ const DetailsAnnouncement = () => {
 
   }, [token])
 
-  function changeImg(index:number) {
+  function changeImg(index: number) {
     setImgSetted(images[index].nameImgFile)
   }
 
@@ -141,6 +141,30 @@ const DetailsAnnouncement = () => {
           </div>
         </div>
         <button>Reservar agora</button>
+
+        <article className={styles.avaliations}>
+          <h2>Avaliações</h2>
+          <div className={styles.containerAvaliations}>
+            <div className={styles.avaliation}>
+              <img src="/" alt="Foto do usuário {nome}" />
+              <div>
+                <p className={styles.nameUser}>NOME_DO_USUÁRIO</p>
+                <p>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorem quam id eos maxime ipsa error rem aliquid quaerat quo quod accusamus, facere atque totam deleniti harum alias autem eligendi numquam?</p>
+                <span className={styles.qtyStars}>
+                  <FaStar color='#FAAD1B' />
+                  <FaStar color='#FAAD1B' />
+                  <FaStar color='#FAAD1B' />
+                  <FaStarHalfAlt color='#FAAD1B' />
+                </span>
+              </div>
+            </div>
+          </div>
+          <form action="">
+            <h3>Avaliar</h3>
+            <textarea name="avaliation" id="avaliation" required></textarea>
+            <input type="submit" value="Comentar" />
+          </form>
+        </article>
       </section>
     </main>
   )

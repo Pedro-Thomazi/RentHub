@@ -1,5 +1,6 @@
 .detailsContainer {
   margin-bottom: 400px;
+
   header {
     display: flex;
     align-items: center;
@@ -93,11 +94,11 @@
           display: flex;
           align-items: center;
           gap: 5px;
-      
+
           p:not(p.number) {
             color: #555;
           }
-      
+
           .number {
             background-color: blue;
             color: #fff;
@@ -113,7 +114,7 @@
         }
       }
     }
-    
+
     button {
       cursor: pointer;
       background-color: #006CE4;
@@ -127,6 +128,78 @@
 
       &:hover {
         background-color: #0035e4;
+      }
+    }
+  }
+
+  .avaliations {
+    h2 {
+      margin: 10px 0;
+    }
+
+    .containerAvaliations {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+
+      .avaliation {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+
+        img {
+          display: block;
+          width: 85px;
+          border-radius: 50%;
+          background-color: #000;
+        }
+
+        div {
+          display: flex;
+          flex-direction: column;
+          gap: 10px;
+
+          .nameUser {
+            font-weight: bold;
+          }
+
+          span.qtyStars {
+            align-self: flex-end;
+          }
+        }
+      }
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      width: 100%;
+      margin-top: 40px;
+
+      textarea {
+        max-height: 300px;
+        height: 100px;
+        resize: vertical;
+        font-size: 1.2rem;
+        padding: 5px;
+      }
+
+      input {
+        width: 300px;
+        margin: 10px 0;
+        padding: 5px;
+        font-size: 1.3rem;
+        font-weight: 500;
+        background-color: #006CE4;
+        color: #fff;
+        border: 1px solid #006CE4;
+        transition: .5s;
+
+        &:hover {
+          background-color: transparent;
+          color: #006CE4;
+
+        }
       }
     }
   }
