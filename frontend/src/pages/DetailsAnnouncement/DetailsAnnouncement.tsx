@@ -37,6 +37,12 @@ interface DataImages {
   nameImgFile: string
 }
 
+interface DataComment {
+  token: string
+  comment: string
+  avaliation: number
+}
+
 const DetailsAnnouncement = () => {
   const { authenticated } = useAuthContext()
   const { id } = useParams()
@@ -64,6 +70,11 @@ const DetailsAnnouncement = () => {
 
   const [images, setImages] = useState<DataImages[]>([])
   const [imgSetted, setImgSetted] = useState<string>("")
+  const [comment, setComment] = useState<DataComment>({
+    token: "",
+    comment: "",
+    avaliation: 0
+  })
   const [token] = useState<string>(localStorage.getItem("token") || "")
 
   useEffect(() => {
@@ -97,6 +108,10 @@ const DetailsAnnouncement = () => {
 
   function changeImg(index: number) {
     setImgSetted(images[index].nameImgFile)
+  }
+
+  function submitComment() {
+
   }
 
   return (
@@ -162,6 +177,10 @@ const DetailsAnnouncement = () => {
           <form action="">
             <h3>Avaliar</h3>
             <textarea name="avaliation" id="avaliation" required></textarea>
+            <label htmlFor="avaliation">
+              <p>Nota</p>
+              <input type="number" name="avaliation" id="avaliation" />
+            </label>
             <input type="submit" value="Comentar" />
           </form>
         </article>
