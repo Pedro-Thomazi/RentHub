@@ -1,5 +1,6 @@
 package br.com.backend.backend.model.Avaliations;
 
+import br.com.backend.backend.model.User.DataGetUser;
 import br.com.backend.backend.model.User.User;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -19,7 +20,7 @@ public class Avaliations {
     private Long id;
     @ManyToOne
     @JoinColumn(name = "usuario_id", nullable = false)
-    private User usuario;
+    private User user;
     private String comment;
     private BigDecimal avaliation;
     @CreationTimestamp
@@ -27,8 +28,8 @@ public class Avaliations {
 
     public Avaliations(){}
 
-    public Avaliations(DataAvaliation data, User usuario) {
-        this.usuario = usuario;
+    public Avaliations(DataAvaliation data, User user) {
+        this.user = user;
         this.comment = data.comment();
         this.avaliation = data.avaliation();
         this.dataComment = LocalDateTime.now();
@@ -40,4 +41,9 @@ public class Avaliations {
     public Long getId() {
         return id;
     }
+
+    public DataGetUser getUser() {
+        return new DataGetUser(this.user);
+    }
+
 }
